@@ -6,4 +6,4 @@ void get_avegarge(float ArrayOfNumbers[], int *i, float *avg)
       sum += ArrayOfNumbers[j];
     };
   *avg = sum/(*i);
-};
+}
