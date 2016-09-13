@@ -1,4 +1,4 @@
-void get_avegarge(float ArrayOfNumbers[], int *i, float *avg)
+void get_average(float ArrayOfNumbers[], int *i, float *avg)
 {
   int j;
   int sum = 0;

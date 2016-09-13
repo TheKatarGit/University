@@ -7,7 +7,7 @@ int main()
   int NumberOfElements = 0;
   float avg = 0;
   read_from_file(ArrayOfNumbers, &NumberOfElements);
-  get_avegarge(ArrayOfNumbers, &NumberOfElements, &avg);
+  get_average(ArrayOfNumbers, &NumberOfElements, &avg);
   print_to_files(ArrayOfNumbers, &NumberOfElements, &avg);
   return 0;
 }
