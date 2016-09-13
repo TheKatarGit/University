@@ -1,8 +1,8 @@
-#include "stdio.h"
+#include <stdio.h>
 #include "InOut.h"
 #include "maths.h"
-int main()
-{
+
+int main(int argc, char const *argv[]) {
   float ArrayOfNumbers[100];
   int NumberOfElements = 0;
   float avg = 0;

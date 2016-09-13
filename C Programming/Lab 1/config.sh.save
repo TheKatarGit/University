@@ -1,7 +1,6 @@
 if [ -e "InOut.h" ] && [ -e "maths.h" ] && [ -e "main.c" ]; then
-  make
-  rm -f old_numbers.txt || true
-  touch old_numbers.txt
+  gcc -Wall -Werror -std=c99 -pedantic main.c InOut.c maths.c
+  rm -f 
   gedit old_numbers.txt
   ./a.out
   gedit old_numbers.txt new_numbers.txt
