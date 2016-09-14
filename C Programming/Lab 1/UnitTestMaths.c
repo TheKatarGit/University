@@ -10,7 +10,7 @@ struct Tests {
   float Array[100];
 };
 
-void UnitTestMaths() {
+int UnitTestMaths() {
   struct Tests Test1={10,5,0,{1,2,3,4,5,6,7,8,9,10}};
   struct Tests Test2 = {7,1,0,{1,1,1,1,1,1,1}};
   struct Tests Test3 = {6,20,0,{0.75,-3.21,65,32.53,0,31}};
