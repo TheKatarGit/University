@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include "InOut.h"
 #include "maths.h"
-#include "stdlib.h"
+#include "unittests.h"
+#include <stdlib.h>
 
 int main(int argc, char const *argv[]) {
   float ArrayOfNumbers[100];
