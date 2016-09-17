@@ -1,6 +1,6 @@
 #include "UnitTestMaths.h"
 #include "maths.h"
-#include "stdlib.h"
+#include <stdlib.h>
 #include "stdio.h"
 
 struct Tests {
@@ -11,6 +11,7 @@ struct Tests {
 };
 
 int UnitTestMaths() {
+  printf("\nTesting maths.h...\n");
   struct Tests Test1={10,5,0,{1,2,3,4,5,6,7,8,9,10}};
   struct Tests Test2 = {7,1,0,{1,1,1,1,1,1,1}};
   struct Tests Test3 = {6,20,0,{0.75,-3.21,65,32.53,0,31}};
@@ -43,4 +44,4 @@ int UnitTestMaths() {
     Test3Res = 0;
   }
   return Test1Res && Test2Res && Test3Res;
-};
+}

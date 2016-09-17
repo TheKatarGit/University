@@ -2,18 +2,18 @@
 #include "stdlib.h"
 #include "InOut.h"
 
-void read_from_file(float ArrayOfNumbers[], int *NumberOfElements, FILE* numbers)
+void read_from_file(float ArrayOfNumbers[], int *NumberOfElements, FILE *numbers)
 {
-  int elemetsCounter = 0;
-  while (fscanf(numbers, "%f ", &ArrayOfNumbers[elemetsCounter]) != EOF) {
-    elemetsCounter++;
+  int elementsCounter = 0;
+  while (fscanf(numbers, "%f ", &ArrayOfNumbers[elementsCounter]) != EOF) {
+    elementsCounter++;
   }
-  *NumberOfElements = elemetsCounter;
+  *NumberOfElements = elementsCounter;
 }
 
-void print_to_files(float ArrayOfNumbers[], int *elemetsCounter, float *avg, FILE* numbers, FILE* new_numbers) {
-  for (int i = 0; i < *elemetsCounter; i++) {
-    if (ArrayOfNumbers[i] < *avg){
+void print_to_files(float ArrayOfNumbers[], int *elementsCounter, float *avg, FILE *numbers, FILE *new_numbers) {
+  for (int i = 0; i < *elementsCounter; i++) {
+    if (ArrayOfNumbers[i] > *avg){
       fprintf(new_numbers, "%f, ", ArrayOfNumbers[i]);
     }
     else{
