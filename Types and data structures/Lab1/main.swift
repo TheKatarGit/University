@@ -1,11 +1,22 @@
 import Foundation
 
 struct Number {
-  var mantiss : String
-  var power : String
+  var mantiss = [Int]()
+  var power = [Int]()
   init() {
-    mantiss = ""
-    power = ""
+    self.mantiss = []
+    self.power = []
+  }
+  mutating func goInt(mantiss: String, power: String) {
+    var temporaryMantiss = Array(mantiss.characters)
+    var temporaryPower = Array(power.characters)
+    for element in temporaryMantiss {
+      self.mantiss.append(Int(String(element))!)
+    }
+
+    for element in temporaryPower {
+      self.power.append(Int(String(element))!)
+    }
   }
 }
 
@@ -21,24 +32,25 @@ func enterArray() -> Number?  {
     return nil
   }
   let newNumber = inputString.components(separatedBy: "e")
-  number.mantiss = newNumber[0]
-  if number.mantiss.characters.count > 31 {
+  var mantiss = newNumber[0]
+  if mantiss.characters.count > 31 {
     print("Mantiss is greater than 30 digits!")
     return nil
   }
-  else if Int(number.mantiss) == nil {
+  else if Int(mantiss) == nil {
     print("Seems like your input is NaN")
     return nil
   }
-  number.power = newNumber[1]
-  if number.power.characters.count > 5 {
+  var power = newNumber[1]
+  if power.characters.count > 5 {
     print("Power is greater than 5 digits!")
     return nil
   }
-  else if Int(number.power) == nil {
+  else if Int(power) == nil {
     print("Seems like your input is NaN")
     return nil
   }
+  number.goInt(mantiss: mantiss, power: power)
   return number
   }
 
