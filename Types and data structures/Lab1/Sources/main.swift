@@ -1,24 +1,44 @@
 import Foundation
 
 struct Number {
-  var mantiss = [Int]()
-  var power = [Int]()
+  var mantiss = [Character]()
+  var power = Int()
   init() {
     self.mantiss = []
-    self.power = []
+    self.power = 0
   }
   mutating func goInt(mantiss: String, power: String) {
-    let temporaryMantiss = Array(mantiss.characters)
-    let temporaryPower = Array(power.characters)
-    for element in temporaryMantiss {
-      self.mantiss.append(Int(String(element))!)
+    self.mantiss = Array(mantiss.characters)
+    self.power = Int(power)!
+  }
+  mutating func times(otherNumber: Number) -> Number {
+    var result = Number()
+    var greaterMantiss = (self.mantiss.count >= otherNumber.mantiss.count ? self.mantiss : otherNumber.mantiss)
+    var lesserMantiss = (self.mantiss.count < otherNumber.mantiss.count ? self.mantiss : otherNumber.mantiss)
+    var greaterMantissSize = (self.mantiss.count >= otherNumber.mantiss.count ? self.mantiss.count : otherNumber.mantiss.count)
+    var lesserMantissSize = (self.mantiss.count < otherNumber.mantiss.count ? self.mantiss.count : otherNumber.mantiss.count)
+    var multiplyMatrix = [[String]]()
+    //TODO Add negative numbers support
+    for index in 1...lesserMantissSize{
+      var multiplyMatrixLine = [String]()
+      for zero in 1..<index{
+        multiplyMatrixLine.append("0")
+      }
+      for otherIndex in 1...greaterMantissSize {
+        if greaterMantiss[greaterMantissSize - otherIndex] != "."{
+        var multiplyResult = Int(String(greaterMantiss[greaterMantissSize - otherIndex]))! * Int(String(lesserMantiss[lesserMantissSize - index]))!
+        multiplyMatrixLine.insert(String(multiplyResult), at: 0)
+        }
+      }
+      multiplyMatrix.append(multiplyMatrixLine)
     }
-
-    for element in temporaryPower {
-      self.power.append(Int(String(element))!)
-    }
+    //TODO bring both numbers to same power by adding zeroes
+    print(multiplyMatrix)
+    return result
   }
 }
+
+
 
 func isStringANumber(testedString : String) -> Bool{
   if testedString.range(of : "e") == nil || testedString.countOccurence(of: "e") > 1 {
@@ -30,7 +50,7 @@ func isStringANumber(testedString : String) -> Bool{
     var perhapsInt : Int?;
     for index in testedString.characters.indices {
       perhapsInt = Int(String(testedString[index]))
-      if perhapsInt == nil && testedString[index] != "e"{
+      if perhapsInt == nil && testedString[index] != "e" && testedString[index] != "."{
         return false
       }
     }
@@ -77,14 +97,19 @@ func enterArray() -> Number?  {
 
 
 func main(){
-  let firstNumber = enterArray()
+  var firstNumber = enterArray()!
+  var secondNumber = enterArray()!
   if firstNumber == nil {
     print("Wrong input!")
   }
   else {
-    print(firstNumber!)
+    print(firstNumber)
   }
-
+  for index in 1...firstNumber.mantiss.count{
+    print(firstNumber.mantiss[firstNumber.mantiss.count - index])
+  }
+  var result = firstNumber.times(otherNumber: secondNumber)
+  print(result)
 }
 
 main()
