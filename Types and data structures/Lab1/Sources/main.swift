@@ -8,8 +8,8 @@ struct Number {
     self.power = []
   }
   mutating func goInt(mantiss: String, power: String) {
-    var temporaryMantiss = Array(mantiss.characters)
-    var temporaryPower = Array(power.characters)
+    let temporaryMantiss = Array(mantiss.characters)
+    let temporaryPower = Array(power.characters)
     for element in temporaryMantiss {
       self.mantiss.append(Int(String(element))!)
     }
@@ -20,6 +20,24 @@ struct Number {
   }
 }
 
+func isStringANumber(testedString : String) -> Bool{
+  if testedString.range(of : "e") == nil || testedString.countOccurence(of: "e") > 1 {
+    print("Seems like your input is NaN")
+    return false
+  }
+  else
+    {
+    var perhapsInt : Int?;
+    for index in testedString.characters.indices {
+      perhapsInt = Int(String(testedString[index]))
+      if perhapsInt == nil && testedString[index] != "e"{
+        return false
+      }
+    }
+  }
+  return true
+}
+
 func enterArray() -> Number?  {
   let inputString : String = readLine()!;
   var number = Number();
@@ -27,7 +45,7 @@ func enterArray() -> Number?  {
     print("String is empty!")
     return nil
   }
-  if inputString.range(of : "e") == nil{
+  if !isStringANumber(testedString : inputString){
     print("Seems like your input is NaN")
     return nil
   }
@@ -37,18 +55,21 @@ func enterArray() -> Number?  {
     print("Mantiss is greater than 30 digits!")
     return nil
   }
-  else if Int(mantiss) == nil {
-    print("Seems like your input is NaN")
-    return nil
-  }
+
   var power = newNumber[1]
   if power.characters.count > 5 {
     print("Power is greater than 5 digits!")
     return nil
   }
   else if Int(power) == nil {
-    print("Seems like your input is NaN")
-    return nil
+    if power.characters.count == 0{
+      power = "0"
+    }
+    else
+      {
+        print("Seems like your input is NaN")
+        return nil
+      }
   }
   number.goInt(mantiss: mantiss, power: power)
   return number
