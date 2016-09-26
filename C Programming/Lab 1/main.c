@@ -2,6 +2,7 @@
 #include "InOut.h"
 #include "maths.h"
 #include "unittests.h"
+#include "delete.h"
 #include <stdlib.h>
 
 int main(int argc, char const *argv[]) {
