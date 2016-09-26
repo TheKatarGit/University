@@ -112,11 +112,29 @@ struct Number {
       }
     }
     result.sign = self.sign ^ otherNumber.sign
+    if sumArray.count > 30{
+      while sumArray.count > 30{
+        sumArray.remove(at: sumArray.endIndex - 1)
+        result.power += 1
+      }
+      sumArray.remove(at: sumArray.endIndex - 1)
+    }
+    sumArray.insert(0,at: 0)
+    result.power += 1
     for element in sumArray{
       result.mantiss.append(Character(String(element)))
     }
+    result.mantiss.insert(".", at:1)
+
     if dotIndex != nil{
-      result.mantiss.insert(".", at:dotIndex! + multiplyMatrix.count - 1 )
+      for powerAdd in 1...dotIndex!{
+        result.power += 1
+      }
+    }
+    else{
+      for powerAdd in 2...result.mantiss.endIndex{
+        result.power += 1
+      }
     }
     return result
   }
