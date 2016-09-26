@@ -19,8 +19,8 @@ func isStringANumber(testedString : String) -> Bool{
 }
 
 func enterNumber() -> Number?  {
-  let inputString : String = readLine()!;
-  var number = Number();
+  let inputString : String = readLine()!
+  var number = Number()
   if inputString.isEmpty  {
     print("String is empty!")
     return nil
@@ -51,36 +51,31 @@ func enterNumber() -> Number?  {
         return nil
       }
   }
-  number.goInt(mantiss: mantiss, power: power)
+  number = Number(mantiss: mantiss, power: power)
   return number
   }
 
 func enterLongInt() -> LongInt? {
-  var inputString : String = readLine()!
+  let inputString : String = readLine()!
 
   if inputString.isEmpty  {
     print("String is empty!")
     return nil
   }
-  var newLongInt = LongInt(from : inputString)
-  print(newLongInt)
+  let newLongInt = LongInt(from : inputString)
   return newLongInt
 
 }
 
 func main(){
   var firstNumber = enterNumber()
-  var secondNumber = enterLongInt()
+  let secondNumber = enterLongInt()
   if firstNumber == nil || secondNumber == nil{
     print("Wrong input!")
+
   }
   else {
-    print(firstNumber!)
-
-  for index in 1...firstNumber!.mantiss.count{
-    // print(firstNumber!.mantiss[firstNumber!.mantiss.count - index])
-  }
-  var result = firstNumber!.times(otherNumber: secondNumber!)
+  let result = firstNumber!.times(otherNumber: secondNumber!)
   print(result)
 }
 }
