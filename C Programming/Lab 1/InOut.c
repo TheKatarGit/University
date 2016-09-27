@@ -6,7 +6,7 @@
 void read_from_file(float ArrayOfNumbers[], int *NumberOfElements, FILE *numbers)
 {
   int elementsCounter = 0;
-  while (fscanf(numbers, "%f ", &ArrayOfNumbers[elementsCounter]) != EOF) {
+  while (fscanf(numbers, "%f ", &ArrayOfNumbers[elementsCounter]) == 1) {
     elementsCounter++;
   }
   *NumberOfElements = elementsCounter;

@@ -1,5 +1,5 @@
 if [ -e "InOut.h" ] && [ -e "maths.h" ] && [ -e "main.c" ]; then
-  make pr
+  make pr -s
   rm -f old_numbers.txt || true
   touch old_numbers.txt
   gedit old_numbers.txt
@@ -7,7 +7,7 @@ if [ -e "InOut.h" ] && [ -e "maths.h" ] && [ -e "main.c" ]; then
   gedit old_numbers.txt new_numbers.txt
   rm -f new_numbers.txt || true
   rm -f old_numbers.txt || true
-  make clean
+  make clean -s
 else
   echo 'Some libraries are absent.'
 fi
