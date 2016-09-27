@@ -31,8 +31,21 @@ func enterNumber() -> Number?  {
   }
   let newNumber = inputString.components(separatedBy: "e")
   var mantiss = newNumber[0]
-  if mantiss.characters.count > 31 {
+  if mantiss.characters.count > 31 && inputString.countOccurence(of: ".") == 1 {
     print("Mantiss is greater than 30 digits!")
+    return nil
+  }
+
+  if mantiss.characters.count > 30 && inputString.countOccurence(of: ".") == 0 {
+    print("Mantiss is greater than 30 digits!")
+    return nil
+  }
+  if inputString.countOccurence(of: ".") > 1{
+    print("Seems like your input is NaN")
+    return nil
+  }
+  if mantiss[mantiss.startIndex] == "."{
+    print("Seems like your input is NaN")
     return nil
   }
 
@@ -68,7 +81,9 @@ func enterLongInt() -> LongInt? {
 }
 
 func main(){
+  print("Input real number: ")
   var firstNumber = enterNumber()
+  print("\nInput integer number: ")
   let secondNumber = enterLongInt()
   if firstNumber == nil || secondNumber == nil{
     print("Wrong input!")
@@ -76,7 +91,16 @@ func main(){
   }
   else {
   let result = firstNumber!.times(otherNumber: secondNumber!)
-  print(result)
+  var resultString = ""
+  if result!.sign{
+    resultString.append("-")
+  }
+  for element in result!.mantiss{
+    resultString.append(String(element))
+  }
+  resultString.append("e")
+  resultString.append(String(result!.power))
+  print("Result of multiplication : \(resultString)")
 }
 }
 

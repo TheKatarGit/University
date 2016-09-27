@@ -30,8 +30,8 @@ struct Number {
     result.power = self.power
     var greaterMantiss = (self.mantiss.count >= otherNumber.mantiss.count ? self.mantiss : otherNumber.mantiss)
     var lesserMantiss = (self.mantiss.count < otherNumber.mantiss.count ? self.mantiss : otherNumber.mantiss)
-    var greaterMantissSize = (self.mantiss.count >= otherNumber.mantiss.count ? self.mantiss.count : otherNumber.mantiss.count)
-    var lesserMantissSize = (self.mantiss.count < otherNumber.mantiss.count ? self.mantiss.count : otherNumber.mantiss.count)
+    let greaterMantissSize = (self.mantiss.count >= otherNumber.mantiss.count ? self.mantiss.count : otherNumber.mantiss.count)
+    let lesserMantissSize = (self.mantiss.count < otherNumber.mantiss.count ? self.mantiss.count : otherNumber.mantiss.count)
     var dotIndex : Int?
     var multiplyMatrix = [[String]]()
 
@@ -39,7 +39,7 @@ struct Number {
     {
       //Initializing line of multiplyMatrix and filling it with zeroes
       var multiplyMatrixLine = [String]()
-      for zero in 1..<index
+      for _ in 1..<index
       {
         multiplyMatrixLine.append("0")
       }
@@ -48,7 +48,7 @@ struct Number {
       {
         if greaterMantiss[greaterMantissSize - otherIndex] != "."
         {
-        var multiplyResult = Int(String(greaterMantiss[greaterMantissSize - otherIndex]))! * Int(String(lesserMantiss[lesserMantissSize - index]))!
+        let multiplyResult = Int(String(greaterMantiss[greaterMantissSize - otherIndex]))! * Int(String(lesserMantiss[lesserMantissSize - index]))!
         multiplyMatrixLine.insert(String(multiplyResult), at: 0)
         }
         else{
@@ -70,7 +70,7 @@ struct Number {
     for line in 0..<multiplyMatrix.count{
       if (longestLineCount - multiplyMatrix[line].count) != 0
       {
-      for pos in 1...longestLineCount - multiplyMatrix[line].count
+      for _ in 1...longestLineCount - multiplyMatrix[line].count
         {
           multiplyMatrix[line].insert("0", at: 0)
         }
@@ -78,7 +78,7 @@ struct Number {
     }
     //Initializing array to hold addition result and filling it with zeroes
     var sumArray = [Int]()
-    for zero in 0..<longestLineCount{
+    for _ in 0..<longestLineCount{
       sumArray.append(0)
     }
     //addition
@@ -115,7 +115,7 @@ struct Number {
     if sumArray.count > 30{
       while sumArray.count > 30{
         sumArray.remove(at: sumArray.endIndex - 1)
-        result.power += 1
+        // result.power += 1
       }
       sumArray.remove(at: sumArray.endIndex - 1)
     }
@@ -127,15 +127,28 @@ struct Number {
     result.mantiss.insert(".", at:1)
 
     if dotIndex != nil{
-      for powerAdd in 1...dotIndex!{
+      for _ in 1...dotIndex!{
         result.power += 1
       }
     }
     else{
-      for powerAdd in 2...result.mantiss.endIndex{
+      for _ in 3..<result.mantiss.endIndex{
         result.power += 1
       }
     }
+    var i = 1
+    let lastElement = result.mantiss.endIndex
+    while result.mantiss[lastElement - i] == "0"{
+      result.mantiss.remove(at: lastElement - i)
+      i+=1
+    }
+    i = 2
+    while  i < result.mantiss.count && result.mantiss[i] == "0"{
+      result.mantiss.remove(at: i)
+      result.power-=1
+      i+=1
+    }
+
     return result
   }
 }
