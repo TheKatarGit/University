@@ -3,19 +3,24 @@
 #include "count.h"
 #include "readFile.h"
 
+#define FILE_NOT_EXIST -1
+#define ALLOC_ERROR -2
+
 int main() {
   int NumberOfElements;
   FILE *inputFile;
   inputFile = fopen("input.txt", "r");
-  //TODO Check file existance
+  if (inputFile == NULL){
+    fprintf(stderr, "File doesn't exist\n");
+    return FILE_NOT_EXIST;
+  }
   read_from_file(&NumberOfElements, inputFile);
   int *memory = NULL;
   memory = malloc(NumberOfElements * sizeof(int));
 
   if (memory == NULL) {
     fprintf(stderr, "Memory allocation failed\n");
-    //TODO define ALLOCERROR
-    return -1;
+    return ALLOC_ERROR;
   }
 
   int *memBegin = memory;

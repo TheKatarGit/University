@@ -1,5 +1,10 @@
 #include "count.h"
+
 int countExistance(int *memStart, int *memFinish) {
+  if ((memStart == NULL) || (memFinish == NULL)){
+    fprintf(stderr, "Wrong pointer recieved\n");
+    return WRONG_POINTER;
+  }
   int uniqueElementsCounter = 0;
   int elementOccurence = 0;
   int *temp;
@@ -18,4 +23,4 @@ int countExistance(int *memStart, int *memFinish) {
     memStart++;
   }
   return uniqueElementsCounter;
-}
+};
