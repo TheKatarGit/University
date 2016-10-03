@@ -1,17 +1,7 @@
 #include "stdio.h"
 #include "stdlib.h"
-
-
-int read_from_file(int *NumberOfElements, FILE *numbers)
-{
-  int Number;
-  int elementsCounter = 0;
-  while (fscanf(numbers, "%d ", &Number) == 1) {
-    elementsCounter++;
-  }
-  *NumberOfElements = elementsCounter;
-  return 0;
-}
+#include "count.h"
+#include "readFile.h"
 
 int main() {
   int NumberOfElements;
@@ -33,8 +23,10 @@ int main() {
   rewind(inputFile);
   while (memBegin != memEnd) {
     fscanf(inputFile, "%d", memBegin);
-    printf("%d\n", *memBegin);
     memBegin++;
   }
+  memBegin = memory;
+  int uniqueElementsCounter = countExistance(memBegin, memEnd);
+  printf("uniqueElementsCounter = %d\n",uniqueElementsCounter );
   return 0;
 }

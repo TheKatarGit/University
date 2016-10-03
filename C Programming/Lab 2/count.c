@@ -1,4 +1,21 @@
-// int countExistance(/* arguments */) {
-//   /* code */
-//   return 0;
-// }
+#include "count.h"
+int countExistance(int *memStart, int *memFinish) {
+  int uniqueElementsCounter = 0;
+  int elementOccurence = 0;
+  int *temp;
+  while (memStart != memFinish) {
+    temp = memStart;
+    while (temp != memFinish){
+      if (*temp == *memStart){
+        elementOccurence++;
+      }
+      temp++;
+    }
+    if (elementOccurence == 1){
+      uniqueElementsCounter++;
+    }
+    elementOccurence = 0;
+    memStart++;
+  }
+  return uniqueElementsCounter;
+}
