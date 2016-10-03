@@ -33,5 +33,7 @@ int main() {
   memBegin = memory;
   int uniqueElementsCounter = countExistance(memBegin, memEnd);
   printf("uniqueElementsCounter = %d\n",uniqueElementsCounter );
+  fclose(inputFile);
+  free(memory);
   return 0;
 }
