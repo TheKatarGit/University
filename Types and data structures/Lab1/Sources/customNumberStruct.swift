@@ -33,31 +33,33 @@ struct Number {
     let greaterMantissSize = (self.mantiss.count >= otherNumber.mantiss.count ? self.mantiss.count : otherNumber.mantiss.count)
     let lesserMantissSize = (self.mantiss.count < otherNumber.mantiss.count ? self.mantiss.count : otherNumber.mantiss.count)
     var dotIndex : Int?
-    var multiplyMatrix = [[String]]()
+    var multiplyMatrix = [[String]](repeating: [String](repeating: String(), count: lesserMantissSize), count: lesserMantissSize)
 
     for index in 1...lesserMantissSize
     {
       //Initializing line of multiplyMatrix and filling it with zeroes
-      var multiplyMatrixLine = [String]()
-      for _ in 1..<index
+      var multiplyMatrixLine = [String](repeating: String(), count: greaterMantissSize)
+      for i in 0..<index
       {
-        multiplyMatrixLine.append("0")
+        multiplyMatrixLine[i] = "0"
       }
-      //filling lines of multiplyMatrix, also detecting dot index
+      //filling lines of multiplyMatrix, also detecting dot
+      var counter = 0;
       for otherIndex in 1...greaterMantissSize
       {
         if greaterMantiss[greaterMantissSize - otherIndex] != "."
         {
         let multiplyResult = Int(String(greaterMantiss[greaterMantissSize - otherIndex]))! * Int(String(lesserMantiss[lesserMantissSize - index]))!
-        multiplyMatrixLine.insert(String(multiplyResult), at: 0)
+        multiplyMatrixLine[counter] = String(multiplyResult)
+        counter+=1
         }
         else{
           dotIndex = greaterMantissSize - otherIndex
         }
       }
-
-      multiplyMatrix.append(multiplyMatrixLine)
+      multiplyMatrix[index-1] = multiplyMatrixLine
     }
+
     //searching for the longest line in multiplyMatrixLine
     var longestLineCount = multiplyMatrix[0].count
     for line in multiplyMatrix{
@@ -77,11 +79,8 @@ struct Number {
       }
     }
     //Initializing array to hold addition result and filling it with zeroes
-    var sumArray = [Int]()
-    for _ in 0..<longestLineCount{
-      sumArray.append(0)
-    }
-    //addition
+    var sumArray = [Int](repeating: 0, count:longestLineCount + 1)
+  
     for columnNumber in 0..<longestLineCount{
       for rowNumber in 1...multiplyMatrix.count{
         sumArray[columnNumber] += Int(multiplyMatrix[rowNumber-1][columnNumber])!
