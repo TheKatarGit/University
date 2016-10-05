@@ -4,6 +4,8 @@
 #include "stdlib.h"
 #include "readFile.h"
 #include "replacer.h"
+
+
 int main(int argc, char const *argv[]){
   FILE *inputFile;
   int NumberOfElements = 0;
