@@ -1,4 +1,4 @@
-make wipe
-make lab
+make wipe -q
+make lab 
 ./lab
-make wipe
+make wipe -q
