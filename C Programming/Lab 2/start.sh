@@ -1,4 +1,3 @@
-make wipe
 make lab
-./lab
-make wipe
+./lab $1
+make wipe -q

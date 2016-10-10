@@ -6,15 +6,21 @@
 #define FILE_NOT_EXIST -1
 #define ALLOC_ERROR -2
 
-int main() {
+int main(int argc, char const *argv[]) {
   int NumberOfElements;
   FILE *inputFile;
-  inputFile = fopen("input.txt", "r");
+  if (argc != 2){
+    printf("Wrong number of arguments\n");
+    return 0;
+  }
+  inputFile = fopen(argv[1], "r");
   if (inputFile == NULL){
     fprintf(stderr, "File doesn't exist\n");
     return FILE_NOT_EXIST;
   }
-  read_from_file(&NumberOfElements, inputFile);
+  if (read_from_file(&NumberOfElements, inputFile) == BADEL){
+    return 0;
+  }
   int *memory = NULL;
   memory = malloc(NumberOfElements * sizeof(int));
 
@@ -26,13 +32,15 @@ int main() {
   int *memBegin = memory;
   int *memEnd = memory + NumberOfElements;
   rewind(inputFile);
-  while (memBegin != memEnd) {
-    fscanf(inputFile, "%d", memBegin);
-    memBegin++;
+  int res = read_to_mem(memBegin, memEnd, inputFile);
+  if (res != 0){
+    free(memory);
+    fclose(inputFile);
+    return 0;
   }
   memBegin = memory;
   int uniqueElementsCounter = countExistance(memBegin, memEnd);
-  printf("uniqueElementsCounter = %d\n",uniqueElementsCounter );
+  printf("uniqueElementsCounter = %d \n",uniqueElementsCounter );
   fclose(inputFile);
   free(memory);
   return 0;

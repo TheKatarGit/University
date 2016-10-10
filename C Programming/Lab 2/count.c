@@ -23,4 +23,4 @@ int countExistance(int *memStart, int *memFinish) {
     memStart++;
   }
   return uniqueElementsCounter;
-} 
+}
