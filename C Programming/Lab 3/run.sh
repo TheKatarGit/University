@@ -1,4 +1,3 @@
 make lab 
-gedit input.txt
-./lab
-make wipe -q
+./lab $1
+make wipe 

@@ -17,11 +17,19 @@ struct list_node* create_node(int num)
 }
 
 
-struct list_node* add_front(struct list_node *head, struct list_node *node)
+struct list_node* add_end(struct list_node *head, struct list_node *node)
 {
-    node->next = head;
+    struct list_node *cur = head;
 
-    return node;
+    if (!head)
+        return node;
+
+    for ( ; cur->next; cur = cur->next)
+        ;
+
+    cur->next = node;
+
+    return head;
 }
 
 void print(struct list_node *head)

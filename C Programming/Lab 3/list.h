@@ -13,7 +13,7 @@ struct list_node
 
 struct list_node* create_node(int num);
 
-struct list_node* add_front(struct list_node *head, struct list_node *node);
+struct list_node* add_end(struct list_node *head, struct list_node *node);
 
 void print(struct list_node *head);
 
