@@ -38,11 +38,7 @@ struct Number {
     for index in 1...lesserMantissSize
     {
       //Initializing line of multiplyMatrix and filling it with zeroes
-      var multiplyMatrixLine = [String](repeating: String(), count: greaterMantissSize)
-      for i in 0..<index
-      {
-        multiplyMatrixLine[i] = "0"
-      }
+      var multiplyMatrixLine = [String](repeating: "0", count: greaterMantissSize)
       //filling lines of multiplyMatrix, also detecting dot
       var counter = 0;
       for otherIndex in 1...greaterMantissSize
@@ -80,7 +76,6 @@ struct Number {
     }
     //Initializing array to hold addition result and filling it with zeroes
     var sumArray = [Int](repeating: 0, count:longestLineCount + 1)
-  
     for columnNumber in 0..<longestLineCount{
       for rowNumber in 1...multiplyMatrix.count{
         sumArray[columnNumber] += Int(multiplyMatrix[rowNumber-1][columnNumber])!
@@ -89,6 +84,7 @@ struct Number {
     //
     var dozens = Int()
     var units = Int()
+    print(result.power)
     for element in 1...sumArray.count{
       if sumArray[sumArray.count - element] >= 10{
         if sumArray.count - element == 0{
@@ -114,39 +110,51 @@ struct Number {
     if sumArray.count > 30{
       while sumArray.count > 30{
         sumArray.remove(at: sumArray.endIndex - 1)
-        // result.power += 1
+        result.power += 1
       }
       sumArray.remove(at: sumArray.endIndex - 1)
     }
     sumArray.insert(0,at: 0)
-    result.power += 1
+    // result.power += 1
     for element in sumArray{
       result.mantiss.append(Character(String(element)))
     }
     result.mantiss.insert(".", at:1)
 
-    if dotIndex != nil{
-      for _ in 1...dotIndex!{
-        result.power += 1
-      }
-    }
-    else{
-      for _ in 3..<result.mantiss.endIndex{
-        result.power += 1
-      }
-    }
     var i = 1
     let lastElement = result.mantiss.endIndex
+
     while result.mantiss[lastElement - i] == "0"{
       result.mantiss.remove(at: lastElement - i)
       i+=1
+      // result.power -= 1
     }
+    print(result.mantiss)
+    if dotIndex != nil{
+      for _ in 0..<dotIndex!{
+        print("DOT")
+        result.power+=1
+        print(result.power)
+      }
+    }
+
+    else{
+      for _ in 3...result.mantiss.endIndex{
+        result.power += 1
+      }
+    }
+    print(result.power)
+
     i = 2
-    while  i < result.mantiss.count && result.mantiss[i] == "0"{
+    while result.mantiss[i] == "0"{
+      print("LOL")
+      print(result.power)
+      print(result.mantiss)
+      // result.power+=1
       result.mantiss.remove(at: i)
-      result.power-=1
-      i+=1
+        print(result.mantiss)
     }
+
 
     return result
   }
