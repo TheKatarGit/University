@@ -11,8 +11,7 @@ struct cods_s{
 
 typedef struct cods_s Cell_t;
 
-typedef enum CellTypes { CELL, GENCELL, GENVISITED, RENDERED, WALL, WAY, CURRENT, LAST, SEEKED, EXIT } CellType_t;
-typedef enum Actions   { NOTHING, GENERATE, SOLVE, ALL, STOP, OUTPUT } Action_t;
+typedef enum CellTypes { CELL, GENCELL, GENVISITED, WALL, WAY, SEEKED, EXIT } CellType_t;
 
 typedef int8_t*  MazeString_t;
 typedef int8_t** MazeMatrix_t;
@@ -43,17 +42,5 @@ typedef struct mazeData_s {
     Cell_t      cellNext;
     bool        error;
 } Data_t;
-
-typedef struct Parms_s {
-        uint16_t width;
-        uint16_t height;
-        uint16_t windowW;
-        uint16_t windowH;
-        uint16_t animationDelay;
-        uint8_t  framesDrop;
-        bool     fullscreen;
-        Cell_t   startPoint;
-        Cell_t   exitPoint;
-} Parms_t;
 
 #endif // TYPES_H

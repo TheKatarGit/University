@@ -13,6 +13,7 @@ void push(Cell_t c, Stack_t *stack){
 
    stack->top = new_node;
    stack->size++;
+  //  free(new_node);
 }
 
 Cell_t pop(Stack_t *stack){

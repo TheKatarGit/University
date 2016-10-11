@@ -58,7 +58,7 @@ CellString_t getNeighbours(Data_t *data, Cell_t c, int8_t distance){
             }
         }
     }
-
+    
     cells.size = size;
     return cells;
 }

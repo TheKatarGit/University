@@ -10,6 +10,7 @@ void seekStep(Data_t* d){
         push(d->startPoint, d->stack); //заносим текущую точку в стек
         d->startPoint = d->cellNext; //делаем соседнюю точку текущей и отмечаем ее посещенной
         free(Neighbours.cells);
+        // printBitmap(d->maze,20,20);
     }
     else if(d->stack->size){
         setMode(d->startPoint, d->maze, SEEKED);

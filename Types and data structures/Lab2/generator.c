@@ -24,7 +24,7 @@ CellString_t getUnvisitedCells(unsigned int width, unsigned int height, MazeMatr
     CellString_t cells;
     unsigned long long i, j, size = 0;
 
-    printBitmap(maze, width, height);
+    // printBitmap(maze, width, height);
 
     cells.cells = malloc(width*height*sizeof(Cell_t));
 
@@ -102,14 +102,15 @@ bool generateStep(Data_t* d){
         d->startPoint       = cellStringUnvisited.cells[randNum];
         free(cellStringUnvisited.cells);
     }
+
     return d;
 }
 
 MazeMatrix_t init(uint16_t width, uint16_t height){
     MazeMatrix_t maze;
-    maze  = malloc(height * sizeof(uint8_t*));
+    maze = malloc(height * sizeof(uint8_t*));
     for(uint16_t i = 0; i < height; i++){ //инициализируем матрицу и заполняем стенами
-        maze[i] = malloc(width  * sizeof(uint8_t));
+        maze[i] = malloc(width * sizeof(uint8_t));
         for(uint16_t j = 0; j < width; j++){
             if((i % 2 != 0   && j % 2 != 0) &&
                (i < height-1 && j < width-1))
@@ -117,12 +118,6 @@ MazeMatrix_t init(uint16_t width, uint16_t height){
             else    maze[i][j] = WALL;
         }
     }
-
-    //for(i = 1; i < height-1; i+=2){ //инициализируем клетки.
-    //    for(j = 1; j < width-1; j+=2){
-    //        maze[i][j] = GENCELL;
-    //    }
-    //}
     return maze;
 }
 
