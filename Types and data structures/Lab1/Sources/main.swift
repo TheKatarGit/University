@@ -50,7 +50,11 @@ func enterNumber() -> Number?  {
   }
 
   var power = newNumber[1]
-  if power.characters.count > 5 {
+  if (power.characters.count > 5 && power.countOccurence(of: "-") < 1) {
+    print("Power is greater than 5 digits!")
+    return nil
+  }
+  else if (power.characters.count > 6 && power.countOccurence(of: "-") > 0){
     print("Power is greater than 5 digits!")
     return nil
   }
@@ -91,16 +95,19 @@ func main(){
   }
   else {
   let result = firstNumber!.times(otherNumber: secondNumber!)
-  var resultString = ""
-  if result!.sign{
-    resultString.append("-")
+  if result != nil{
+    var resultString = ""
+    if result!.sign{
+      resultString.append("-")
+    }
+    for element in result!.mantiss{
+      resultString.append(String(element))
+    }
+    resultString.append("e")
+    resultString.append(String(result!.power))
+    print("Result of multiplication : \(resultString)")
   }
-  for element in result!.mantiss{
-    resultString.append(String(element))
-  }
-  resultString.append("e")
-  resultString.append(String(result!.power))
-  print("Result of multiplication : \(resultString)")
+
 }
 }
 

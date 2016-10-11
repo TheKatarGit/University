@@ -27,12 +27,32 @@ struct Number {
 
   mutating func times(otherNumber: LongInt) -> Number? {
     var result = Number()
+    var dotIndex : Int?
+    for i in 0..<self.mantiss.endIndex{
+      if self.mantiss[i] == "."{
+        dotIndex = i;
+      }
+    }
+    print(self.power)
+    if dotIndex != nil{
+      self.mantiss.remove(at: dotIndex!)
+      let j = 0
+      while self.mantiss[j] == "0"{
+        self.mantiss.remove(at: j)
+        self.power-=1
+        if self.power < -99999{
+          print("Result exceeds given power limit.")
+          return nil
+        }
+      }
+    }
     result.power = self.power
+    print(self)
     var greaterMantiss = (self.mantiss.count >= otherNumber.mantiss.count ? self.mantiss : otherNumber.mantiss)
     var lesserMantiss = (self.mantiss.count < otherNumber.mantiss.count ? self.mantiss : otherNumber.mantiss)
     let greaterMantissSize = (self.mantiss.count >= otherNumber.mantiss.count ? self.mantiss.count : otherNumber.mantiss.count)
     let lesserMantissSize = (self.mantiss.count < otherNumber.mantiss.count ? self.mantiss.count : otherNumber.mantiss.count)
-    var dotIndex : Int?
+
     var multiplyMatrix = [[String]](repeating: [String](repeating: String(), count: lesserMantissSize), count: lesserMantissSize)
 
     for index in 1...lesserMantissSize
@@ -55,7 +75,6 @@ struct Number {
       }
       multiplyMatrix[index-1] = multiplyMatrixLine
     }
-
     //searching for the longest line in multiplyMatrixLine
     var longestLineCount = multiplyMatrix[0].count
     for line in multiplyMatrix{
@@ -75,7 +94,7 @@ struct Number {
       }
     }
     //Initializing array to hold addition result and filling it with zeroes
-    var sumArray = [Int](repeating: 0, count:longestLineCount + 1)
+    var sumArray = [Int](repeating: 0, count:longestLineCount+1)
     for columnNumber in 0..<longestLineCount{
       for rowNumber in 1...multiplyMatrix.count{
         sumArray[columnNumber] += Int(multiplyMatrix[rowNumber-1][columnNumber])!
@@ -85,14 +104,22 @@ struct Number {
     var dozens = Int()
     var units = Int()
     print(result.power)
+    if (dotIndex != nil){
+      for _ in dotIndex!..<self.mantiss.count{
+        result.power+=1
+      }
+    }
+    print(result.power)
     for element in 1...sumArray.count{
       if sumArray[sumArray.count - element] >= 10{
         if sumArray.count - element == 0{
           if element == 30 {
-          result.power += 1
           if result.power > 99999{
             print("Result exceeds given power limit.")
             return nil
+          }
+          else{
+            result.power += 1
           }
         }
         else{
@@ -110,49 +137,48 @@ struct Number {
     if sumArray.count > 30{
       while sumArray.count > 30{
         sumArray.remove(at: sumArray.endIndex - 1)
-        result.power += 1
+        if result.power > 99999{
+          print("Result exceeds given power limit.")
+          return nil
+        }
+        else{
+          result.power += 1
+        }
       }
       sumArray.remove(at: sumArray.endIndex - 1)
     }
     sumArray.insert(0,at: 0)
-    // result.power += 1
     for element in sumArray{
       result.mantiss.append(Character(String(element)))
     }
     result.mantiss.insert(".", at:1)
-
     var i = 1
     let lastElement = result.mantiss.endIndex
 
     while result.mantiss[lastElement - i] == "0"{
       result.mantiss.remove(at: lastElement - i)
       i+=1
-      // result.power -= 1
     }
-    print(result.mantiss)
-    if dotIndex != nil{
-      for _ in 0..<dotIndex!{
-        print("DOT")
-        result.power+=1
-        print(result.power)
+    print(result.mantiss[2])
+    print("THIS")
+    print(result.mantiss.endIndex)
+      for _ in 2..<result.mantiss.endIndex{
+        if result.power > 99999{
+          print("Result exceeds given power limit.")
+          return nil
+        }
+        else{
+          print("DONE")
+          result.power += 1
+        }
       }
-    }
-
-    else{
-      for _ in 3...result.mantiss.endIndex{
-        result.power += 1
-      }
-    }
+    print(result)
     print(result.power)
-
     i = 2
     while result.mantiss[i] == "0"{
-      print("LOL")
-      print(result.power)
-      print(result.mantiss)
-      // result.power+=1
+      print("BLAH")
       result.mantiss.remove(at: i)
-        print(result.mantiss)
+      result.power-=1
     }
 
 
