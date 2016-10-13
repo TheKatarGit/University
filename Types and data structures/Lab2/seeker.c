@@ -15,8 +15,10 @@ void seekStep(Data_t* d){
     else if(d->stack->size){
         setMode(d->startPoint, d->maze, SEEKED);
         d->startPoint = pop(d->stack);
+        free(Neighbours.cells);
     }
     else{
         d->error = true;
+        free(Neighbours.cells);
     }
 }

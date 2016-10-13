@@ -14,7 +14,4 @@ CellString_t getNeighbours(Data_t *data, Cell_t cell, int8_t distance);
 
 uint32_t     randomRange (uint32_t low, uint32_t high);
 
-//save to png
-bool save_png_libpng(const char *filename, uint8_t *pixels, uint16_t w, uint16_t h);
-
 #endif // COMMON_H

@@ -8,6 +8,7 @@ int main(int argc, char const *argv[]) {
   startPoint.x = 1;
   startPoint.y = 1;
   Data_t d = initGeneratorData(width,height,startPoint);
+  // free(d.maze);
   Cell_t exitPoint;
   exitPoint.x = width - 2;
   exitPoint.y = height - 2;
@@ -23,7 +24,11 @@ int main(int argc, char const *argv[]) {
 
   setMode(seeker.exitPoint,seeker.maze, EXIT);
   printBitmap(seeker.maze,width,height);
-  // free(seeker.stack);
+  free(seeker.stack);
+  
+  // wipe(d.stack);
+  // free(d.stack);
+
   // free(seeker.maze);
   free(d.maze);
   return 0;
