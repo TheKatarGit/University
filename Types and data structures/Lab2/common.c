@@ -58,8 +58,10 @@ CellString_t getNeighbours(Data_t *data, Cell_t c, int distance){
             }
         }
     }
-
     cells.size = size;
+    if (cells.cells == NULL){
+      free(cells.cells);
+    }
     return cells;
 }
 

@@ -94,6 +94,7 @@ bool generateStep(Data_t* d){
 
     else if(d->stack->size){ //если нет соседей, возвращаемся на предыдущую точку
         d->startPoint = pop(d->stack);
+        free(cellStringNeighbours.cells);
     }
 
     else{ //если нет соседей и точек в стеке, но не все точки посещены, выбираем случайную из непосещенных
@@ -101,6 +102,7 @@ bool generateStep(Data_t* d){
         randNum             = randomRange(0, cellStringUnvisited.size-1);
         d->startPoint       = cellStringUnvisited.cells[randNum];
         free(cellStringUnvisited.cells);
+        free(cellStringNeighbours.cells);
     }
 
     return d;

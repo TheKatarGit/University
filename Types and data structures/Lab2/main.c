@@ -1,6 +1,7 @@
 #include "generator.h"
 #include "seeker.h"
 #include "stdio.h"
+#include "string.h"
 int main(int argc, char const *argv[]) {
   int width, height;
   scanf("%d %d",&width, &height);
@@ -8,7 +9,6 @@ int main(int argc, char const *argv[]) {
   startPoint.x = 1;
   startPoint.y = 1;
   Data_t d = initGeneratorData(width,height,startPoint);
-  // free(d.maze);
   Cell_t exitPoint;
   exitPoint.x = width - 2;
   exitPoint.y = height - 2;
@@ -24,12 +24,12 @@ int main(int argc, char const *argv[]) {
 
   setMode(seeker.exitPoint,seeker.maze, EXIT);
   printBitmap(seeker.maze,width,height);
+  wipe(seeker.stack);
   free(seeker.stack);
-  
-  // wipe(d.stack);
-  // free(d.stack);
 
-  // free(seeker.maze);
+  for (size_t i = 0; i < height; i++) {
+    free(d.maze[i]);
+  }
   free(d.maze);
   return 0;
 }
