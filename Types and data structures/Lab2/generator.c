@@ -42,9 +42,9 @@ CellString_t getUnvisitedCells(unsigned int width, unsigned int height, MazeMatr
 }
 
 void removeWall(Cell_t first, Cell_t second, MazeMatrix_t maze){
-    int8_t xDiff = second.x - first.x;
-    int8_t yDiff = second.y - first.y;
-    int8_t addX, addY;
+    int xDiff = second.x - first.x;
+    int yDiff = second.y - first.y;
+    int addX, addY;
     Cell_t target;
 
     addX = (xDiff != 0) ? (xDiff / abs(xDiff)) : 0; //(diff.x > 0) ? 1 : 0, (!diff.x) ? 0
@@ -56,11 +56,11 @@ void removeWall(Cell_t first, Cell_t second, MazeMatrix_t maze){
     maze[target.y][target.x] = GENVISITED;
 }
 
-uint32_t unvisitedCount(uint16_t width, uint16_t height, MazeMatrix_t maze){
-    uint32_t count = 0;
+int unvisitedCount(int width, int height, MazeMatrix_t maze){
+    int count = 0;
 
-    for (uint16_t i = 0; i < height; i++) {
-        for (uint16_t j = 0; j < width; j++) {
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
             if(maze[i][j] != WALL && maze[i][j] != GENVISITED) count++;
         }
     }
@@ -69,7 +69,7 @@ uint32_t unvisitedCount(uint16_t width, uint16_t height, MazeMatrix_t maze){
 }
 
 bool generateStep(Data_t* d){
-    uint32_t     randNum;
+    int     randNum;
     CellString_t cellStringUnvisited;
     CellString_t cellStringNeighbours = getNeighbours(d, d->startPoint, 2);
 
@@ -106,12 +106,12 @@ bool generateStep(Data_t* d){
     return d;
 }
 
-MazeMatrix_t init(uint16_t width, uint16_t height){
+MazeMatrix_t init(int width, int height){
     MazeMatrix_t maze;
-    maze = malloc(height * sizeof(uint8_t*));
-    for(uint16_t i = 0; i < height; i++){ //инициализируем матрицу и заполняем стенами
-        maze[i] = malloc(width * sizeof(uint8_t));
-        for(uint16_t j = 0; j < width; j++){
+    maze = malloc(height * sizeof(int*));
+    for(int i = 0; i < height; i++){ //инициализируем матрицу и заполняем стенами
+        maze[i] = malloc(width * sizeof(int));
+        for(int j = 0; j < width; j++){
             if((i % 2 != 0   && j % 2 != 0) &&
                (i < height-1 && j < width-1))
                     maze[i][j] = GENCELL;
@@ -121,9 +121,9 @@ MazeMatrix_t init(uint16_t width, uint16_t height){
     return maze;
 }
 
-MazeMatrix_t finalize(uint16_t width, uint16_t height, MazeMatrix_t maze){
-    for(uint16_t i = 0; i < height; i++){
-        for(uint16_t j = 0; j < width; j++){
+MazeMatrix_t finalize(int width, int height, MazeMatrix_t maze){
+    for(int i = 0; i < height; i++){
+        for(int j = 0; j < width; j++){
             if(maze[i][j] != WALL)
                 maze[i][j] = CELL;
         }

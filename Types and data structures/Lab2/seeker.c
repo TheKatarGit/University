@@ -1,7 +1,7 @@
 #include "seeker.h"
 
 void seekStep(Data_t* d){
-    uint32_t randNum;
+    int randNum;
     CellString_t Neighbours = getNeighbours(d, d->startPoint, 1);
     if(Neighbours.size){
         setMode(d->startPoint, d->maze, WAY);

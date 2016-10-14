@@ -1,10 +1,10 @@
 #include "funcs.h"
 
-void printBitmap(MazeMatrix_t maze, uint16_t w, uint16_t h){
+void printBitmap(MazeMatrix_t maze, int w, int h){
     printf("\n");
-    for(uint16_t i = 0; i < h; i++){
+    for(int i = 0; i < h; i++){
         printf("\n");
-        for(uint16_t j = 0; j < w; j++){
+        for(int j = 0; j < w; j++){
                 if(maze[i][j] == WALL)
                     printf("\u25A0 ");
                 else if (maze[i][j] == WAY)

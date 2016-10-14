@@ -3,15 +3,15 @@
 #include "generator.h"
 #include "types.h"
 
-Data_t initGeneratorData(uint16_t width, uint16_t height, Cell_t startPoint);
+Data_t initGeneratorData(int width, int height, Cell_t startPoint);
 
 Data_t initSeekerData(Data_t d, Cell_t startPoint, Cell_t exitPoint);
 
 //generator and seeker common functions
 void         setMode (Cell_t cell, MazeMatrix_t maze, CellType_t type);
 
-CellString_t getNeighbours(Data_t *data, Cell_t cell, int8_t distance);
+CellString_t getNeighbours(Data_t *data, Cell_t cell, int distance);
 
-uint32_t     randomRange (uint32_t low, uint32_t high);
+int     randomRange (int low, int high);
 
 #endif // COMMON_H

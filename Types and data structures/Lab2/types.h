@@ -5,20 +5,20 @@
 #include <stdbool.h>
 
 struct cods_s{
-    uint16_t x;
-    uint16_t y;
+    int x;
+    int y;
 };
 
 typedef struct cods_s Cell_t;
 
 typedef enum CellTypes { CELL, GENCELL, GENVISITED, WALL, WAY, SEEKED, EXIT } CellType_t;
 
-typedef int8_t*  MazeString_t;
-typedef int8_t** MazeMatrix_t;
+typedef int*  MazeString_t;
+typedef int** MazeMatrix_t;
 
 typedef struct CellString_s {
     Cell_t   *cells;
-    uint32_t  size;
+    int  size;
 } CellString_t;
 
 typedef struct Node_s {
@@ -28,13 +28,13 @@ typedef struct Node_s {
 
 typedef struct Stack_s {
     Node_t*  top;
-    uint32_t size;
+    int size;
 } Stack_t;
 
 typedef struct mazeData_s {
-    uint16_t    width;
-    uint16_t    height;
-    uint32_t    unvisitedNum;
+    int    width;
+    int    height;
+    int    unvisitedNum;
     MazeMatrix_t  maze;
     Stack_t    *stack;
     Cell_t      startPoint;
