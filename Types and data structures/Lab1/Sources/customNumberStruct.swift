@@ -35,7 +35,7 @@ struct Number {
         dotIndex = i;
       }
     }
-    print(self.power)
+    // print(self.power)
     if dotIndex != nil{
       self.mantiss.remove(at: dotIndex!)
       let j = 0
@@ -43,44 +43,50 @@ struct Number {
         self.mantiss.remove(at: j)
         self.power-=1
         if self.power < -99999{
-          print("Result exceeds given power limit.")
+          // print("Result exceeds given power limit.")
           return nil
         }
       }
     }
     result.power = self.power
-    print(self)
-    var greaterMantiss = (self.mantiss.count >= otherNumber.mantiss.count ? self.mantiss : otherNumber.mantiss)
-    var lesserMantiss = (self.mantiss.count < otherNumber.mantiss.count ? self.mantiss : otherNumber.mantiss)
-    let greaterMantissSize = (self.mantiss.count >= otherNumber.mantiss.count ? self.mantiss.count : otherNumber.mantiss.count)
-    let lesserMantissSize = (self.mantiss.count < otherNumber.mantiss.count ? self.mantiss.count : otherNumber.mantiss.count)
+    // print(self)
+    var greaterMantiss =  self.mantiss
+    var lesserMantiss = otherNumber.mantiss
+    let greaterMantissSize = self.mantiss.count
+    let lesserMantissSize = otherNumber.mantiss.count
 
-    var multiplyMatrix = [[String]](repeating: [String](repeating: String(), count: lesserMantissSize), count: lesserMantissSize)
+    var multiplyMatrix = [[String]](repeating: [String](repeating: String(), count: lesserMantissSize), count: greaterMantissSize)
 
     for index in 1...lesserMantissSize
     {
       //Initializing line of multiplyMatrix and filling it with zeroes
-      var multiplyMatrixLine = [String](repeating: "0", count: greaterMantissSize)
+
       //filling lines of multiplyMatrix, also detecting dot
       var counter = 0;
       for otherIndex in 1...greaterMantissSize
       {
+        var multiplyMatrixLine = [String](repeating: "0", count: greaterMantissSize)
         if greaterMantiss[greaterMantissSize - otherIndex] != "."
         {
-        let multiplyResult = Int(String(greaterMantiss[greaterMantissSize - otherIndex]))! * Int(String(lesserMantiss[lesserMantissSize - index]))!
-        multiplyMatrixLine[counter] = String(multiplyResult)
 
-        for _ in 0..<counter{
-          multiplyMatrixLine[counter].append("0")
-        }
+        let multiplyResult = Int(String(greaterMantiss[greaterMantissSize - otherIndex]))! * Int(String(lesserMantiss[lesserMantissSize - index]))!
+        // print(multiplyResult)
+        multiplyMatrixLine[greaterMantissSize - counter - 1] = String(multiplyResult)
+        print(multiplyMatrixLine)
+        // for i in 0..<counter{
+        //   multiplyMatrixLine.append("0")
+        // }
 
         counter+=1
+
         }
         else{
           dotIndex = greaterMantissSize - otherIndex
         }
+        multiplyMatrix[counter-1] = multiplyMatrixLine
       }
-      multiplyMatrix[index-1] = multiplyMatrixLine
+      // print(multiplyMatrix)
+
     }
     //searching for the longest line in multiplyMatrixLine
     var longestLineCount = multiplyMatrix[0].count
@@ -104,19 +110,19 @@ struct Number {
     for line in 0..<multiplyMatrix.count{
       multiplyMatrix[line] = multiplyMatrix[line].reversed()
     }
-    // print(multiplyMatrix)
+    // // print(multiplyMatrix)
     // multiplyMatrix = multiplyMatrix.reversed()
     //Initializing array to hold addition result and filling it with zeroes
-    print("MATRIX\(multiplyMatrix)")
+    // print("MATRIX\(multiplyMatrix)")
     var sumArray = [Int](repeating: 0, count:longestLineCount)
-    for rowNumber in 0..<multiplyMatrix.count{
-      print(multiplyMatrix[rowNumber])
-      for columnNumber in 0..<multiplyMatrix[rowNumber].count{
-        print(multiplyMatrix[rowNumber][columnNumber])
-        sumArray[rowNumber] += Int(multiplyMatrix[rowNumber][columnNumber])! //* Int(pow(Double(10), Double(rowNumber)))
-        print("RES \(sumArray[rowNumber])")
+
+    for columnNumber in 0..<longestLineCount{
+      for rowNumber in 0..<multiplyMatrix.count{
+        // print(multiplyMatrix[rowNumber][columnNumber])
+        sumArray[columnNumber] += Int(multiplyMatrix[rowNumber][columnNumber])! //* Int(pow(Double(10), Double(rowNumber)))
+        // print("RES \(sumArray[columnNumber])")
+      }
     }
-  }
 
     sumArray = sumArray.reversed()
     print(sumArray)
@@ -124,10 +130,10 @@ struct Number {
     // var units = Int()
     for element in 1...sumArray.count{
       if sumArray[sumArray.count - element] >= 10{
-        print("BREAK AT \(element)")
+        // print("BREAK AT \(element)")
         var tempString = String(sumArray[sumArray.count - element])
         var arr = Array(tempString.characters)
-        print("ARR \(arr)")
+        // print("ARR \(arr)")
         let units = Int(String(arr[arr.endIndex - 1]))
         arr.remove(at: arr.endIndex - 1)
         let dozens = Int(String(arr))
@@ -137,52 +143,15 @@ struct Number {
         sumArray[sumArray.count - element] = units!
         sumArray[sumArray.count - element - 1] += dozens!
       }
-      print(sumArray)
+      // print(sumArray)
     }
 
-    // for element in 1...sumArray.count{
-    //   if (sumArray[sumArray.count - element] >= 10) &&  (element != sumArray.count){
-    //     // print("BREAK")
-    //     if sumArray.count - element == 0{
-    //       // print("BREAK")
-    //       if element == 30 {
-    //         // print("BREAK")
-    //       result.power += 1
-    //       if result.power > 99999{
-    //         // print("BREAK")
-    //         print("Result exceeds given power limit.")
-    //         return nil
-    //       }
-    //     }
-    //     else{
-    //       print("BREAK")
-    //       sumArray.insert(0, at: 0)
-    //     }
-    //   }
-    //     if element == sumArray.count {
-    //       sumArray.insert(0, at: 0)
-    //     }
-    //     var tempString = Array(String(sumArray[sumArray.count - element]).characters)
-    //     var strdozens = String()
-    //     var iter = 0
-    //     while iter != tempString.endIndex - 1{
-    //       strdozens.append(tempString[iter])
-    //       iter += 1
-    //     }
-    //     dozens = Int(strdozens)!
-    //     sumArray[sumArray.count - element - 1] += dozens
-    //     print("BREAK at \(element)")
-    //     units = sumArray[sumArray.count - element] % 10
-    //     sumArray[sumArray.count - element] = units
-    //   }
-    //   print(sumArray)
-    // }
 
     while sumArray[0] >= 10{
       sumArray.insert(0, at:0)
       var tempString = String(sumArray[1])
       var arr = Array(tempString.characters)
-      print("ARR \(arr)")
+      // print("ARR \(arr)")
       let units = Int(String(arr[arr.endIndex - 1]))
       arr.remove(at: arr.endIndex - 1)
       let dozens = Int(String(arr))
@@ -190,17 +159,17 @@ struct Number {
       sumArray[0] += dozens!
 
     }
-    print("COUNT \(sumArray.count)")
+    // print("COUNT \(sumArray.count)")
     result.sign = self.sign ^ otherNumber.sign
     if sumArray.count > 30{
       while sumArray.count > 30{
         if sumArray[sumArray.endIndex - 1] >= 5{
           sumArray[sumArray.endIndex - 2] += 1
         }
-        print("ARA \(sumArray)")
+        // print("ARA \(sumArray)")
         sumArray.remove(at: sumArray.endIndex - 1)
         if result.power > 99999{
-          print("Result exceeds given power limit.")
+          // print("Result exceeds given power limit.")
           return nil
         }
         else{
@@ -209,7 +178,7 @@ struct Number {
       }
       sumArray.remove(at: sumArray.endIndex - 1)
     }
-      print("COUNT \(sumArray.count)")
+      // print("COUNT \(sumArray.count)")
     sumArray.insert(0,at: 0)
     for element in sumArray{
       result.mantiss.append(Character(String(element)))
@@ -223,24 +192,24 @@ struct Number {
       result.power += 1
       i+=1
     }
-    print(result.mantiss[2])
-    print("THIS")
-    print(result.mantiss.endIndex)
+    // print(result.mantiss[2])
+    // print("THIS")
+    // print(result.mantiss.endIndex)
       for _ in 2..<result.mantiss.endIndex{
         if result.power > 99999{
-          print("Result exceeds given power limit.")
+          // print("Result exceeds given power limit.")
           return nil
         }
         else{
-          print("DONE")
+          // print("DONE")
           result.power += 1
         }
       }
-    print(result)
-    print(result.power)
+    // print(result)
+    // print(result.power)
     i = 2
     while result.mantiss[i] == "0"{
-      print("BLAH")
+      // print("BLAH")
       result.mantiss.remove(at: i)
       result.power-=1
     }
