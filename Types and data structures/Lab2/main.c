@@ -57,6 +57,9 @@ int main(int argc, char const *argv[]) {
           printf("Time needed for popping an element from a the stack is %lf\n",(double)(end - start));
           printf("Stack popped.\n");
         }
+        else if (stack->top == NULL){
+          printf("Stack is empty! \n");
+        }
         else{
           printf("Create a stack first!\n");
         }
