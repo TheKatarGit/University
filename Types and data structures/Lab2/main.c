@@ -2,34 +2,92 @@
 #include "seeker.h"
 #include "stdio.h"
 #include "string.h"
+#include "stack.h"
+#include "terminalgui.h"
+
+
 int main(int argc, char const *argv[]) {
-  int width, height;
-  scanf("%d %d",&width, &height);
-  Cell_t startPoint;
-  startPoint.x = 1;
-  startPoint.y = 1;
-  Data_t d = initGeneratorData(width,height,startPoint);
-  Cell_t exitPoint;
-  exitPoint.x = width - 2;
-  exitPoint.y = height - 2;
-  if (width % 2 == 0) exitPoint.x-=1;
-  if (height % 2 == 0) exitPoint.y-=1;
-  while (unvisitedCount(width,height,d.maze) > 0) {
-    generateStep(&d);
-  }
-  Data_t seeker = initSeekerData(d,startPoint,exitPoint);
-  while ((seeker.startPoint.x != seeker.exitPoint.x || seeker.startPoint.y != seeker.exitPoint.y) && seeker.error != 1) {
-    seekStep(&seeker);
+  int Exit = 1;
+  clock_t start, end;
+  char choice;
+  int stack_created = 0;
+  Stack_t *stack;
+  while (Exit) {
+    printf("Make a choice, Neo: \n");
+    choice = getchar();
+    clean_stdin();
+    switch (choice) {
+      case 'l':
+        printf("Starting maze generation...\n");
+        start_labyrinth();
+        clean_stdin();
+        break;
+      case 's':
+        start = clock();
+        stack = calloc(1, sizeof(Stack_t));
+        end = clock();
+        stack_created = 1;
+        printf("Stack initialised.\n");
+        printf("Time needed for stack initialisation is %lf\n",(double)(end - start));
+        break;
+      case 'p':
+        if (stack_created){
+          int x,y;
+          printf("Choose a point to be pushed into stack: ");
+          scanf("%d %d", &x, &y);
+          clean_stdin();
+          Cell_t point;
+          point.x = x;
+          point.y = y;
+          start = clock();
+          push(point, stack);
+          end = clock();
+          printf("Time needed for pushing int a stack is %lf\n",(double)(end - start));
+          printf("Point pushed.\n");
+        }
+        else{
+          printf("Create a stack first!\n");
+        }
+        break;
+      case 'o':
+        if ((stack_created) && (stack->top != NULL)){
+          start = clock();
+          pop(stack);
+          end = clock();
+          printf("Time needed for popping an element from a the stack is %lf\n",(double)(end - start));
+          printf("Stack popped.\n");
+        }
+        else{
+          printf("Create a stack first!\n");
+        }
+        break;
+      case 'w':
+        if (stack_created){
+          start = clock();
+          wipe(stack);
+          free(stack);
+          end = clock();
+          stack_created = 0;
+          printf("Time needed for wiping and freeing a stack is %lf\n",(double)(end - start));
+          printf("Stack wiped\n");
+        }
+        else{
+          printf("Create a stack first!\n");
+        }
+        break;
+      case 'e':
+        if (stack_created){
+          wipe(stack);
+          free(stack);
+        }
+        Exit = 0;
+        break;
+      default:
+        printf("This is not an option.\n");
+        break;
+    }
   }
 
-  setMode(seeker.exitPoint,seeker.maze, EXIT);
-  printBitmap(seeker.maze,width,height);
-  wipe(seeker.stack);
-  free(seeker.stack);
 
-  for (size_t i = 0; i < height; i++) {
-    free(d.maze[i]);
-  }
-  free(d.maze);
   return 0;
 }
