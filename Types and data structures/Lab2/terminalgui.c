@@ -36,7 +36,6 @@ void start_labyrinth() {
     printf("Time needed for maze generation and salvation is %lf\n",(double)(end - start));
 }
 
-#include <stdio.h>
 void clean_stdin(void)
 {
     int c;
