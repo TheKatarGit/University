@@ -2,6 +2,9 @@
 
 #define _LIST_H_
 
+#include <stdlib.h>
+#include <stdio.h>
+
 
 struct list_node
 {
