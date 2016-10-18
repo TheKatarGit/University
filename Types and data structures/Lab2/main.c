@@ -10,6 +10,7 @@ int main(int argc, char const *argv[]) {
   int Exit = 1;
   clock_t start, end;
   char choice;
+  void *save;
   int stack_created = 0;
   Stack_t *stack;
 
@@ -17,7 +18,7 @@ int main(int argc, char const *argv[]) {
   printf("by N.Brodov & D.Mikhalkovich\n\n");
 
 
-  while (Exit) 
+  while (Exit)
   {
 
     printf("Available commands: \n");
@@ -26,6 +27,7 @@ int main(int argc, char const *argv[]) {
     printf("o - delete element from stack\n");
     printf("w - clear the stack\n");
     printf("l - start maze generator and solver\n");
+    printf("r - print current stack\n");
     printf("e - exit\n\n");
 
     printf("Make a choice, Neo: \n");
@@ -40,6 +42,7 @@ int main(int argc, char const *argv[]) {
       case 's':
         start = clock();
         stack = calloc(1, sizeof(Stack_t));
+        save = &stack;
         end = clock();
         stack_created = 1;
         printf("----------------\n");
@@ -97,7 +100,7 @@ int main(int argc, char const *argv[]) {
           printf("Stack is empty! \n");
           printf("----------------\n");
         }
-        else 
+        else
         {
           printf("----------------\n");
           printf("Create a stack first!\n");
@@ -124,6 +127,18 @@ int main(int argc, char const *argv[]) {
           printf("----------------\n");
         }
         break;
+      case 'r':
+        if (stack_created){
+          print(stack);
+          // clean_stdin();
+        }
+        else
+        {
+          printf("----------------\n");
+          printf("Create a stack first!\n");
+          printf("----------------\n");
+        }
+        break;
       case 'e':
         if (stack_created)
         {
@@ -138,6 +153,7 @@ int main(int argc, char const *argv[]) {
         printf("----------------\n");
         break;
     }
+
   }
 
 

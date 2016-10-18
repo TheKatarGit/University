@@ -13,7 +13,6 @@ void push(Cell_t c, Stack_t *stack){
 
    stack->top = new_node;
    stack->size++;
-  //  free(new_node);
 }
 
 Cell_t pop(Stack_t *stack){
@@ -35,4 +34,18 @@ void wipe(Stack_t *s){
     }
     s->top  = NULL;
     s->size = 0;
+}
+
+
+void print(Stack_t *stack)
+{
+    Node_t *temp_node = malloc(sizeof(Node_t));
+    temp_node->next = stack->top;
+    printf("Current Stack:\n");
+    for ( ; stack->top; stack->top = stack->top->next)
+        printf("%d %d \n", stack->top->cell.x, stack->top->cell.y);
+
+    printf("\n");
+    stack->top = temp_node->next;
+    free(temp_node);
 }
