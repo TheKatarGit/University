@@ -22,7 +22,6 @@ Cell_t pop(Stack_t *stack){
     Node_t* top    = stack->top;
 
     stack->top = stack->top->next;
-
     free(top);
     stack->size--;
     return popped;
