@@ -43,3 +43,39 @@ void clean_stdin(void)
         c = getchar();
     } while (c != '\n' && c != EOF);
 }
+
+void compare(){
+    clock_t start, end;
+    Cell_t point1, point2;
+
+    Cell_t *array = malloc(1000*sizeof(Cell_t));
+    start = clock();
+    for (size_t i = 0; i < 1000; i++) {
+        point1.x = i;
+        point1.y = i;
+        *(array + i) = point1;
+    }
+    end = clock();
+    printf("Time needed for creating an array of 1000 is %lf\n",(double)(end - start));
+    Stack_t *stack = calloc(1, sizeof(Stack_t));
+    stack->top = NULL;
+    start = clock();
+    for (size_t i = 0; i < 1000; i++) {
+
+        point2.x = i;
+        point2.y = i;
+        push(point2, stack);
+    }
+    end = clock();
+
+    printf("Time needed for creating a stack of 1000 is %lf\n",(double)(end - start));
+
+    start = clock();
+    free(array);
+    end = clock();
+    printf("Time needed for freeing an array of 1000 is %lf\n",(double)(end - start));
+    start = clock();
+    wipe(stack);
+    end = clock();
+    printf("Time needed for freeing a stack of 1000 is %lf\n",(double)(end - start));
+}

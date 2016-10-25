@@ -8,5 +8,6 @@
 
 void start_labyrinth();
 void clean_stdin();
+void compare();
 
 Stack_t create_stack();

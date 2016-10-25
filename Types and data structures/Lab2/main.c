@@ -26,8 +26,9 @@ int main(int argc, char const *argv[]) {
     printf("p - add element to stack\n");
     printf("o - delete element from stack\n");
     printf("w - clear the stack\n");
-    printf("l - start maze generator and solver\n");
     printf("r - print current stack\n");
+    printf("l - start maze generator and solver\n");
+    printf("c - compare array and stack implementation\n");
     printf("e - exit\n\n");
 
     printf("Make a choice, Neo: \n");
@@ -138,6 +139,9 @@ int main(int argc, char const *argv[]) {
           printf("Create a stack first!\n");
           printf("----------------\n");
         }
+        break;
+      case 'c':
+        compare();
         break;
       case 'e':
         if (stack_created)
