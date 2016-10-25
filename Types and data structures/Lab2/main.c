@@ -49,6 +49,7 @@ int main(int argc, char const *argv[]) {
         printf("----------------\n");
         printf("Stack initialised.\n");
         printf("Time needed for stack initialisation is %lf\n",(double)(end - start));
+        printf("Stack begins at %p\n",stack);
         printf("----------------\n");
         break;
       case 'p':
@@ -71,10 +72,12 @@ int main(int argc, char const *argv[]) {
           point.y = y;
           start = clock();
           push(point, stack);
+          save = &stack;
           end = clock();
           printf("----------------\n");
           printf("Time needed for pushing int a stack is %lf\n",(double)(end - start));
           printf("Point pushed.\n");
+          printf("Now stack begins at %p\n",stack->top);
           printf("----------------\n");
         }
         else
@@ -87,6 +90,7 @@ int main(int argc, char const *argv[]) {
       case 'o':
         if ((stack_created) && (stack->top != NULL))
         {
+          printf("Removing Node at adress %p...\n",stack->top);
           start = clock();
           pop(stack);
           end = clock();
@@ -141,7 +145,9 @@ int main(int argc, char const *argv[]) {
         }
         break;
       case 'c':
+        printf("----------------\n");
         compare();
+        printf("----------------\n");
         break;
       case 'e':
         if (stack_created)

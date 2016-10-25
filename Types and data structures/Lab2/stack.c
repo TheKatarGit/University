@@ -20,7 +20,7 @@ Cell_t pop(Stack_t *stack){
 
     Cell_t  popped = stack->top->cell;
     Node_t* top    = stack->top;
-
+    
     stack->top = stack->top->next;
     free(top);
     stack->size--;
@@ -42,7 +42,7 @@ void print(Stack_t *stack)
     temp_node->next = stack->top;
     printf("Current Stack:\n");
     for ( ; stack->top; stack->top = stack->top->next)
-        printf("%d %d \n", stack->top->cell.x, stack->top->cell.y);
+        printf("Point (%d, %d) at %p\n", stack->top->cell.x, stack->top->cell.y, stack->top);
 
     printf("\n");
     stack->top = temp_node->next;
