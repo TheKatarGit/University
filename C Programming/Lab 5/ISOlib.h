@@ -1,5 +1,9 @@
+#include "string.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "ctype.h"
 
-void remove_extra_spaces(char *string, int string_length);
+char *remove_extra_spaces(char *string, int string_length);
 
 void replace_commas(char *string, int string_length);
 
