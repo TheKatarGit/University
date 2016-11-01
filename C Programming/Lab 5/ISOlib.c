@@ -41,6 +41,21 @@ char *replace_commas(char *string, int string_length) {
     return new_string;
 }
 
-void capitalize_beginning(char *string, int string_length) {
-    /* code */
+char *capitalize_beginning(char *string, int string_length) {
+    char *new_string = malloc(string_length*sizeof(char));
+    int i = 0;
+    int j = 0;
+    while (i < string_length) {
+        if ((string[i-1] == '.') || (i == 0)){
+            new_string[j] = toupper(string[i]);
+            j++;
+            new_string[j] = ' ';
+        }
+        else{
+            new_string[j] = string[i];
+        }
+        i++;
+    }
+    return new_string;
+
 }

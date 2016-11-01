@@ -7,4 +7,4 @@ char *remove_extra_spaces(char *string, int string_length);
 
 char *replace_commas(char *string, int string_length);
 
-void capitalize_beginning(char *string, int string_length);
+char *capitalize_beginning(char *string, int string_length);

@@ -33,10 +33,10 @@ void go_through(FILE *inFile, const char *replacee, const char *replacer){
                 counter-=1;
             }
             else{
-                printf("SKIP %d\n",skip );
+                // printf("SKIP %d\n",skip );
                 skip++;
                 if (skip == 2){
-                    printf("lol%s\n",current );
+                    // printf("lol%s\n",current );
                     fprintf(outFile, "%s", current);
                     skip = 0;
                 }
