@@ -9,7 +9,7 @@ void rearrange(char *array, int letter, int len) {
         *(array + i) = *(array + i + 1);
 
     }
-    *(array + len) = letter;
+    // *(array + len) = letter;
 }
 
 void go_through(FILE *inFile, const char *replacee, const char *replacer){
@@ -25,20 +25,24 @@ void go_through(FILE *inFile, const char *replacee, const char *replacer){
     do {
         if (counter > len){
             // counter = 0;
-
             if (!strcmp(current, replacee)){
-                // printf("%s\n",current );
+                printf("BLYAT\n");
                 fprintf(outFile, "%s", replacer);
                 rearrange(current, letter, len);
                 counter-=1;
+                skip = 2;
             }
-            else{
-                // printf("SKIP %d\n",skip );
-                skip++;
-                if (skip == 2){
-                    // printf("lol%s\n",current );
+            else
+            {
+                if (skip == 0)
+                {
+                    printf("SUKA\n" );
                     fprintf(outFile, "%s", current);
-                    skip = 0;
+                    // skip = 0;
+                }
+                else
+                {
+                    skip--;
                 }
                 rearrange(current, letter, len);
                 counter -=1;

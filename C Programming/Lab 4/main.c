@@ -16,6 +16,12 @@ int main() {
         printf("Character not found");
     }
     char *str = new_strdup(str1, len1);
+    for (size_t i = 0; i < strlen(str); i++) {
+        if (str[i] != str1[i]) {
+            printf("Strdup test failed\n");
+        }
+    }
+    printf("Strdup test passed\n");
     printf("%s\n",str);
     return 0;
 }
