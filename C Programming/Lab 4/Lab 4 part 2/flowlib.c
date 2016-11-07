@@ -14,21 +14,24 @@ void rearrange(char *array, int letter, int len) {
 
 void go_through(FILE *inFile, const char *replacee, const char *replacer){
     FILE *outFile;
+    fpos_t pos;
     outFile = fopen("out.txt", "w");
     int len = strlen(replacee);
-    len--;
+    // len--;
     char *current = malloc(len*sizeof(char));
-    int letter;
+    char *res;
     int counter = 0;
     int skip = 0;
-    letter = fgetc(inFile);
+    fgetpos(inFile, &pos);
+    fgets(current,len+1,inFile);
     do {
+        printf("%s\n",current);
         if (counter > len){
             // counter = 0;
             if (!strcmp(current, replacee)){
                 printf("BLYAT\n");
                 fprintf(outFile, "%s", replacer);
-                rearrange(current, letter, len);
+                // rearrange(current, letter, len);
                 counter-=1;
                 skip = 2;
             }
@@ -44,19 +47,27 @@ void go_through(FILE *inFile, const char *replacee, const char *replacer){
                 {
                     skip--;
                 }
-                rearrange(current, letter, len);
+                // rearrange(current, letter, len);
                 counter -=1;
             }
         }
 
-        *(current + counter) = letter;
-        printf("%s\n",current );
-        letter = fgetc(inFile);
-        counter++;
+        // *(current + counter) = letter;
+
+        fsetpos(inFile, &pos);
+        // printf("POS %d\n",ftell(inFile));
+        fgetc(inFile);
+        // printf("POS %d\n",ftell(inFile));
+        fgetpos(inFile, &pos);
+        fgets(current,len+1,inFile);
+        // printf("%s\n",current);
+
+        // printf("POS %d\n",ftell(inFile) );
+        // counter++;
         // printf("%c\n",letter);
 
-    } while (letter != EOF);
+    } while(!feof(inFile));
     fprintf(outFile, "\n");
-    free(current);
+    // free(current);
     fclose(outFile);
 }
