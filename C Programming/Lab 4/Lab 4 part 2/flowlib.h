@@ -2,4 +2,4 @@
 #include "stdlib.h"
 #include "string.h"
 
-void go_through(FILE *infile,const char *replacee ,const char *replacer);
+int go_through(FILE *infile,const char *replacee ,const char *replacer);

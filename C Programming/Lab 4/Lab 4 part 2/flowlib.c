@@ -12,62 +12,41 @@ void rearrange(char *array, int letter, int len) {
     // *(array + len) = letter;
 }
 
-void go_through(FILE *inFile, const char *replacee, const char *replacer){
+int go_through(FILE *inFile, const char *replacee, const char *replacer){
     FILE *outFile;
     fpos_t pos;
     outFile = fopen("out.txt", "w");
+    if (outFile == NULL) {
+        return -1;
+    }
     int len = strlen(replacee);
-    // len--;
     char *current = malloc(len*sizeof(char));
     char *res;
-    int counter = 0;
+    int counter = len;
     int skip = 0;
     fgetpos(inFile, &pos);
     fgets(current,len+1,inFile);
     do {
-        printf("%s\n",current);
-        if (counter > len){
-            // counter = 0;
+        if (counter == len){
             if (!strcmp(current, replacee)){
-                printf("BLYAT\n");
+                counter = 0;
                 fprintf(outFile, "%s", replacer);
-                // rearrange(current, letter, len);
-                counter-=1;
-                skip = 2;
             }
             else
             {
-                if (skip == 0)
-                {
-                    printf("SUKA\n" );
-                    fprintf(outFile, "%s", current);
-                    // skip = 0;
-                }
-                else
-                {
-                    skip--;
-                }
-                // rearrange(current, letter, len);
-                counter -=1;
+                fprintf(outFile, "%c", current[0]);
+                counter--;
             }
         }
-
-        // *(current + counter) = letter;
-
         fsetpos(inFile, &pos);
-        // printf("POS %d\n",ftell(inFile));
         fgetc(inFile);
-        // printf("POS %d\n",ftell(inFile));
         fgetpos(inFile, &pos);
         fgets(current,len+1,inFile);
-        // printf("%s\n",current);
-
-        // printf("POS %d\n",ftell(inFile) );
-        // counter++;
-        // printf("%c\n",letter);
+        counter++;
 
     } while(!feof(inFile));
+    free(current);
     fprintf(outFile, "\n");
-    // free(current);
     fclose(outFile);
+    return 0;
 }
