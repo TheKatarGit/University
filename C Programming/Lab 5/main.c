@@ -1,12 +1,12 @@
 #include "ISOlib.h"
 
 int main(int argc, char const *argv[]) {
-    char string[36] = "   why     no ,u suck        my.dick";
-    printf("%s\n", remove_extra_spaces(string, 36));
-    // char *blah2 = replace_commas(blah, 36);
-    // char *blah3 = capitalize_beginning(blah2, 36);
-    // char *blah4 = remove_extra_spaces(blah3, 36);
-    // capitalize_beginning(string, 36);
-    // printf("%s\n",string);
+    char string[100] = "test,string.here.";
+    char *blah = remove_extra_spaces(string, strlen(string));
+    printf("%s\n",blah );
+    blah = replace_commas(blah, strlen(blah));
+    printf("%s\n",blah );
+    blah = capitalize_beginning(blah, strlen(blah));
+    printf("%s\n",blah );
     return 0;
 }
