@@ -8,5 +8,6 @@ int main(int argc, char const *argv[]) {
     printf("%s\n",blah );
     blah = capitalize_beginning(blah, strlen(blah));
     printf("%s\n",blah );
+    free(blah);
     return 0;
 }
