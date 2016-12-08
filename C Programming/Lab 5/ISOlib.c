@@ -65,20 +65,16 @@ char *capitalize_beginning(char *string, int string_length) {
             if (isspace(string[i-1])) {
               j--;
             }
-            new_string[j] = '.';
-            j++;
+            new_string[j++] = '.';
             if (isspace(string[i+1])){
               i+=2;
             }
             else{
               i+=1;
             }
-            new_string[j] = ' ';
-            j++;
-            new_string[j] = toupper(string[i]);
-            j++;
-            i++;
-        }
+            new_string[j++] = ' ';
+            new_string[j++] = toupper(string[i++]);
+          }
         else{
             new_string[j] = string[i];
             j++;
