@@ -25,6 +25,37 @@ char *remove_extra_spaces(char *string, int string_length) {
     return new_string;
 }
 
+char *read_str(FILE *f){
+  int buf = 5;
+  char tmp[5];
+  char* str = malloc(5);
+  char* temp;
+  temp = str;
+  //str[4] = '\0';
+  int strl = 0;
+  int strlt = 0;
+  char *fl;
+  puts("kek1");
+  while(str){
+    puts("kek2");
+    temp = fgets(tmp,buf,f);
+    puts("kek3");
+    puts(temp);
+    puts(str);
+    printf("\n%d\n",strl);
+    if(temp){
+      strl+=buf;
+      temp = str + strl;
+      str = realloc(str,strl);
+      puts("kek4");
+    }
+  }
+  puts(temp);
+  //str[strl-1] = '\0';
+  return str;
+}
+
+
 char *replace_commas(char *string, int string_length) {
     char *new_string = malloc(string_length*sizeof(char));
     int i = 0;
