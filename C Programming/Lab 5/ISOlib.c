@@ -31,23 +31,27 @@ char *read_str(FILE *f){
   char* str = malloc(5);
   char* temp;
   temp = str;
+  //printf("\nstart point - %p\n",str);
   //str[4] = '\0';
-  int strl = 0;
+  int strl = 5;
   int strlt = 0;
   char *fl;
-  puts("kek1");
-  while(str){
-    puts("kek2");
+  while(temp){
     temp = fgets(tmp,buf,f);
-    puts("kek3");
-    puts(temp);
-    puts(str);
-    printf("\n%d\n",strl);
+    if(temp == NULL){puts("Konec");return NULL;}
+    strcat(str,temp);
+    if(temp[strlen(temp)-1] == '\n'){return str;}
+    //printf("\ntemp - %s\n",temp);
+    //printf("\nstr - %s\n",str);
+    //printf("\nstrlen - %d\n",strl);
     if(temp){
       strl+=buf;
-      temp = str + strl;
-      str = realloc(str,strl);
-      puts("kek4");
+      //printf("\nstrl - %d\n",strl);
+      //printf("\nstrlen - %lu\n",strlen(str));
+      //printf("\ncur point - %p\n",str);
+      str = (char*)realloc(str,strl);
+      //printf("\nstrlen after - %lu\n",strlen(str));
+      //printf("\nsize of chr - %lu\n",sizeof(str));
     }
   }
   puts(temp);
