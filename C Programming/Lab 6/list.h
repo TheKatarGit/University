@@ -3,11 +3,14 @@
 #include "string.h"
 
 struct Mylist_node{
-  string model;
-  int price;
+  void *data;
   struct Mylist_node *next;
-
 };
+
+typedef struct data{
+  char model[20];
+  int price;
+} data_t;
 
 void fill_list(struct Mylist_node *start,FILE* f);
 void print_list(struct Mylist_node *start);
