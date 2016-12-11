@@ -5,15 +5,17 @@ int main(int argc, char const *argv[]) {
     printf("Insufficient arguments\n");
     return 0;
   }
-  struct Mylist_node *start;
+  struct MyList_node *start;
   FILE *f = fopen(argv[1], "r");
   if (!f) {
     printf("Couldn't open file\n");
     return 0;
   }
-  // fill_list(start, f);
-  // fclose(f);
-  // print_list(start);
+  puts("OK?");
+  start = fill_list(start, f);
+  puts("OK?");
+  fclose(f);
+  print_list(start);
   // pop_front(start);
   // print_list(start);
   // pop_end(start);

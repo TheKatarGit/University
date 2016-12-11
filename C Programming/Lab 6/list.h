@@ -12,9 +12,10 @@ struct MyList_node{
   struct MyList_node *next;
 };
 
-void fill_List(struct MyList_node *start,FILE* f);
-void print_List(struct MyList_node *start);
+struct MyList_node* fill_list(struct MyList_node *start,FILE* f);
+void print_list(struct MyList_node *start);
 
+struct MyList_node* add_front(struct MyList_node *start, struct MyList_node *node);
 struct MyList_node* create_node(char *model, int price);
 struct MyList_node pop_front(struct MyList_node *start);
 struct MyList_node pop_end(struct MyList_node *start);
