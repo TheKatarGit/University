@@ -7,15 +7,16 @@ typedef struct data{
   int price;
 } data_t;
 
-struct Mylist_node{
+struct MyList_node{
   data_t* data;
-  struct Mylist_node *next;
+  struct MyList_node *next;
 };
 
-void fill_list(struct Mylist_node *start,FILE* f);
-void print_list(struct Mylist_node *start);
+void fill_List(struct MyList_node *start,FILE* f);
+void print_List(struct MyList_node *start);
 
-struct MyList_node pop_front(struct Mylist_node *start);
-struct MyList_node pop_end(struct Mylist_node *start);
-struct MyList_node reverse(struct Mylist_node *start);
-struct MyList_node insert_sort(struct Mylist_node *start);
+struct MyList_node* create_node(char *model, int price);
+struct MyList_node pop_front(struct MyList_node *start);
+struct MyList_node pop_end(struct MyList_node *start);
+struct MyList_node reverse(struct MyList_node *start);
+struct MyList_node insert_sort(struct MyList_node *start);

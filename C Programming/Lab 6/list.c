@@ -13,7 +13,7 @@ struct MyList_node* create_node(char *model, int price){
 
 
 
-void fill_list(struct Mylist_node *start,FILE* f){
+void fill_List(struct MyList_node *start,FILE* f){
   char model[20];
   int price;
   while (!feof(f)) {
@@ -24,7 +24,7 @@ void fill_list(struct Mylist_node *start,FILE* f){
   }
 }
 
-void print_list(struct Mylist_node *start){
+void print_List(struct MyList_node *start){
   printf("List:\n");
   for ( ; start; start = start->next){
 			printf("\nModel - %s\nPrice - %d\n\n",start->data->model,start->data->price);
