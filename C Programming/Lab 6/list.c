@@ -1,6 +1,5 @@
 #include "list.h"
 
-
 struct MyList_node* create_node(char *model, int price){
     struct MyList_node *node = malloc(sizeof(struct MyList_node));
     if (node){
@@ -16,7 +15,6 @@ struct MyList_node* create_node(char *model, int price){
 struct MyList_node* add_front(struct MyList_node *start, struct MyList_node *node)
 {
     node->next = start;
-
     return node;
 
 }
@@ -30,7 +28,6 @@ struct MyList_node* fill_list(struct MyList_node *start,FILE* f){
       //puts("OK?2");
       fscanf(f, "%s", model);
       fscanf(f, "%d", &price);
-      //puts("OK?3");
       node = create_node(model, price);
       start = add_front(start,node);
   }
@@ -43,4 +40,17 @@ void print_list(struct MyList_node *start){
 			printf("\nModel - %s\nPrice - %d\n\n",start->data->model,start->data->price);
 	}
   printf("\n");
+}
+
+
+struct MyList_node* pop_front(struct MyList_node *start){
+  struct MyList_node* node = malloc(sizeof(struct MyList_node));
+  node->data = start->data;
+  node->next = start->next;
+
+  // free(start->data);
+  // free(start->next);
+  // free(start);
+  start = node->next;
+  return node;
 }
