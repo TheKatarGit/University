@@ -43,19 +43,15 @@ void print_list(struct MyList_node *start){
 }
 
 
-struct MyList_node* pop_front(struct MyList_node *start){
-  struct MyList_node* node = malloc(sizeof(struct MyList_node));
-  node->data = start->data;
-  node->next = start->next;
-
-  // free(start->data);
-  // free(start->next);
-  // free(start);
-  start = node->next;
-  return node;
+data_t* pop_front(struct MyList_node *start){
+  struct MyList_node* temp = start;
+  data_t *data = start->data;
+  free(start);
+  *start = *temp->next;
+  return data;
 }
 
-data_t*  pop_end(struct MyList_node *start){
+data_t* pop_end(struct MyList_node *start){
   struct MyList_node *temp;
   while(start->next){
     if(start->next->next == NULL){temp = start;}
