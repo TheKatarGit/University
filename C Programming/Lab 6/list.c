@@ -3,7 +3,6 @@
 
 struct MyList_node* create_node(char *model, int price){
     struct MyList_node *node = malloc(sizeof(struct MyList_node));
-    //puts("OK?5");
     if (node){
         node->data = malloc(sizeof(data_t));
         strcpy(node->data->model, model);
