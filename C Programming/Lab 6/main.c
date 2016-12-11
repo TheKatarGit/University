@@ -16,9 +16,10 @@ int main(int argc, char const *argv[]) {
   puts("OK?");
   fclose(f);
   print_list(start);
-  printf("%s\n", pop_front(start)->model);
-
+  start = reverse(start);
+  print_list(start);
   printf("\n%d\n",pop_end(start)->price);
   print_list(start);
+
   return 0;
 }

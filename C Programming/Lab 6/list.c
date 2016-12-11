@@ -63,7 +63,13 @@ data_t* pop_end(struct MyList_node *start){
   return data;
 }
 
-
-
-// struct MyList_node* reverse(struct MyList_node *start){
-// }
+struct MyList_node* reverse(struct MyList_node* root) {
+  struct MyList_node* new_root = NULL;
+  while (root) {
+    struct MyList_node* next = root->next;
+    root->next = new_root;
+    new_root = root;
+    root = next;
+  }
+  return new_root;
+}

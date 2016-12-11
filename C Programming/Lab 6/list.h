@@ -18,5 +18,5 @@ struct MyList_node* add_front(struct MyList_node *start, struct MyList_node *nod
 struct MyList_node* create_node(char *model, int price);
 data_t* pop_front(struct MyList_node *start);
 data_t* pop_end(struct MyList_node *start);
-struct MyList_node* reverse(struct MyList_node *start);
+struct MyList_node* reverse(struct MyList_node *root);
 struct MyList_node insert_sort(struct MyList_node *start);
