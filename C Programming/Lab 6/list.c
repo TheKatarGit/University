@@ -54,3 +54,20 @@ struct MyList_node* pop_front(struct MyList_node *start){
   start = node->next;
   return node;
 }
+
+data_t*  pop_end(struct MyList_node *start){
+  struct MyList_node *temp;
+  while(start->next){
+    if(start->next->next == NULL){temp = start;}
+    start = start->next;
+  }
+  data_t* data = start->data;
+  free(start);
+  temp->next = NULL;
+  return data;
+}
+
+
+
+// struct MyList_node* reverse(struct MyList_node *start){
+// }

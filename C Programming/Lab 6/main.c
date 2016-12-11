@@ -16,6 +16,8 @@ int main(int argc, char const *argv[]) {
   puts("OK?");
   fclose(f);
   print_list(start);
+  printf("\n%d\n",pop_end(start)->price);
+  print_list(start);
   // pop_front(start);
   // print_list(start);
   // pop_end(start);
