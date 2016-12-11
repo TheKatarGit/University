@@ -31,6 +31,7 @@ char *read_str(FILE *f){
   char* str = malloc(5);
   char* temp;
   temp = str;
+  if (!f){return _FILE_ERR_;}
   //printf("\nstart point - %p\n",str);
   //str[4] = '\0';
   int strl = 5;

@@ -12,7 +12,7 @@ int main(int argc, char const *argv[]) {
       puts("Cycle started");
       string = read_str(f);
       puts("Sucsess");
-      if (string == NULL){return 0;}
+      if (string == NULL){return _END_OF_FILE_;}
       blah = remove_extra_spaces(string, strlen(string));
       printf("blah after space rem - %s\n",blah );
       blah = replace_commas(blah, strlen(blah));
