@@ -3,7 +3,7 @@
 #include "string.h"
 
 struct Mylist_node{
-  void *data;
+  (void*) data_t data;
   struct Mylist_node *next;
 };
 
