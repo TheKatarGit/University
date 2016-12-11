@@ -73,3 +73,41 @@ struct MyList_node* reverse(struct MyList_node* root) {
   }
   return new_root;
 }
+
+
+struct MyList_node* insert(struct MyList_node* begin, struct MyList_node* position, struct MyList_node* new_Item){
+   //check if we add to the beginning
+   if(begin == position) {
+       new_Item->next = begin;
+       return new_Item;
+   }
+   struct MyList_node* pom = begin;
+   while(pom->next != position) {
+       pom = pom->next;
+   }
+   new_Item->next = pom->next;
+   pom->next = new_Item;
+   return begin;
+}
+
+struct MyList_node* insertion_sort(struct MyList_node* begin){
+   struct MyList_node* sorted = begin;
+   struct MyList_node* preaktual = begin;
+   struct MyList_node* pom;
+   struct MyList_node* pom1;
+
+   while(preaktual->next != NULL) {
+       pom = sorted;
+	   while( preaktual->next  != NULL && pom != preaktual->next && pom->data->price < preaktual->next->data->price)
+        pom = pom->next;
+       if(preaktual->next != pom) {
+           pom1 = preaktual->next;
+           preaktual->next = preaktual->next->next;
+           sorted = insert(sorted, pom, pom1);
+       }
+       else{
+        preaktual = preaktual->next;
+       }
+   }
+   return sorted;
+}

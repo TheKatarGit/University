@@ -20,6 +20,8 @@ int main(int argc, char const *argv[]) {
   print_list(start);
   printf("\n%d\n",pop_end(start)->price);
   print_list(start);
+  start = insertion_sort(start);
+  print_list(start);
 
   return 0;
 }
