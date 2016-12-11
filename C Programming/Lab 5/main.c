@@ -11,7 +11,7 @@ int main(int argc, char const *argv[]) {
     while(string){
       puts("Cycle started");
       string = read_str(f);
-      puts("Sucsess");
+      puts("Success");
       if (string == NULL){return _END_OF_FILE_;}
       blah = remove_extra_spaces(string, strlen(string));
       printf("blah after space rem - %s\n",blah );
