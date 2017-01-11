@@ -25,21 +25,23 @@ struct MyList_node* fill_list(struct MyList_node *start,FILE* f){
   struct MyList_node *node;
   //puts("OK?1");
   while (!feof(f)) {
-      //puts("OK?2");
-      fscanf(f, "%s", model);
-      fscanf(f, "%d", &price);
-      node = create_node(model, price);
-      start = add_front(start,node);
+      if (fscanf(f, "%s %d", model, &price) == 2){
+        node = create_node(model, price);
+        start = add_front(start,node);
+      }
   }
   return start;
 }
 
 void print_list(struct MyList_node *start){
   printf("List:\n");
+
   for ( ; start; start = start->next){
+
 			printf("\nModel - %s\nPrice - %d\n\n",start->data->model,start->data->price);
 	}
   printf("\n");
+
 }
 
 
