@@ -39,7 +39,7 @@ char *read_str(FILE *f){
   char *fl;
   while(temp){
     temp = fgets(tmp,buf,f);
-    if(temp == NULL){puts("Konec");return NULL;}
+    if(temp == NULL){return NULL;}
     strcat(str,temp);
     if(temp[strlen(temp)-1] == '\n'){return str;}
     //printf("\ntemp - %s\n",temp);
