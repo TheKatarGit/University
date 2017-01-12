@@ -8,12 +8,14 @@ struct MyList_node* create_node(char *model, int price){
         node->data->price = price;
         node->next = NULL;
     }
+
     //puts("OK?");
     return node;
 }
 
 struct MyList_node* add_front(struct MyList_node *start, struct MyList_node *node)
 {
+
     node->next = start;
     return node;
 
@@ -30,6 +32,7 @@ struct MyList_node* fill_list(struct MyList_node *start,FILE* f){
         start = add_front(start,node);
       }
   }
+
   return start;
 }
 
@@ -37,9 +40,8 @@ void print_list(struct MyList_node *start){
   printf("List:\n");
 
   for ( ; start; start = start->next){
-
 			printf("\nModel - %s\nPrice - %d\n\n",start->data->model,start->data->price);
-	}
+  }
   printf("\n");
 
 }
@@ -91,6 +93,19 @@ struct MyList_node* insert(struct MyList_node* begin, struct MyList_node* positi
    pom->next = new_Item;
    return begin;
 }
+
+void free_all(struct MyList_node* start){
+  struct MyList_node *next;
+
+  for ( ; start; start = next){
+      puts("kek");
+      next = start->next;
+      free(start->data);
+      free(start);
+  }
+}
+
+
 
 struct MyList_node* insertion_sort(struct MyList_node* begin){
    struct MyList_node* sorted = begin;

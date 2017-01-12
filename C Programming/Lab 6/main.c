@@ -5,24 +5,39 @@ int main(int argc, char const *argv[]) {
     printf("Insufficient arguments\n");
     return 0;
   }
-  struct MyList_node *start;
+
+
+  struct MyList_node *start = NULL;
+
   FILE *f = fopen(argv[1], "r");
   if (!f) {
     printf("Couldn't open file\n");
     return 0;
   }
-  puts("OK?");
+  puts("FILL LIST?");
   start = fill_list(start, f);
-  puts("OK?");
+  puts("PRINT LIST?");
   fclose(f);
-  print_list(start);
   puts("OK?");
+  print_list(start);
+  puts("REVERSE LIST?");
   start = reverse(start);
   print_list(start);
-  printf("\n%d\n",pop_end(start)->price);
+  puts("POP END?");
+  data_t* temp1 = pop_end(start);
+  data_t* temp2 = pop_front(start);
+
+  printf("\n%d\n",temp1->price);
+  puts("POP FRONT?");
+  printf("\n%d\n",temp2->price);
   print_list(start);
+  puts("INSERTION SORT?");
   start = insertion_sort(start);
   print_list(start);
-
+  free_all(start);
+  puts("OK?");
+  free(temp1);
+  free(temp2);
+  printf("HA %d\n",sizeof(data_t));
   return 0;
 }
