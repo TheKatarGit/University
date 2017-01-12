@@ -101,7 +101,6 @@ void free_all(struct MyList_node* start){
   struct MyList_node *next;
   if(!start){printf("\nInvalid pointer! \n");return;}
   for ( ; start; start = next){
-      puts("kek");
       next = start->next;
       free(start->data);
       free(start);

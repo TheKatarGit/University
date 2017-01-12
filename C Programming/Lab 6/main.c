@@ -1,7 +1,7 @@
 #include "list.h"
 
 int main(int argc, char const *argv[]) {
-  if (argc != 2) {
+  if (argc != 3) {
     printf("Insufficient arguments\n");
     return 0;
   }
@@ -14,30 +14,59 @@ int main(int argc, char const *argv[]) {
     printf("Couldn't open file\n");
     return 0;
   }
-  puts("FILL LIST?");
   start = fill_list(start, f);
-  puts("PRINT LIST?");
   fclose(f);
-  puts("OK?");
   print_list(start);
-  puts("REVERSE LIST?");
+
+  if (!strcmp(argv[2], "M")) {
   start = reverse(start);
   print_list(start);
-  puts("POP END?");
   data_t* temp1 = pop_end(start);
   data_t* temp2 = pop_front(start);
-
-  printf("\n%d\n",temp1->price);
-  puts("POP FRONT?");
-  printf("\n%d\n",temp2->price);
+  printf("\nPopped %d from end\n",temp1->price);
+  printf("\nPopped %d from front\n",temp2->price);
   print_list(start);
-  puts("INSERTION SORT?");
   start = insertion_sort(start);
   print_list(start);
   free_all(start);
-  puts("OK?");
   free(temp1);
   free(temp2);
-  printf("HA %d\n",sizeof(data_t));
   return 0;
+}
+  else if (!strcmp(argv[2], "F")){
+    printf("Pop Front\n");
+    data_t* temp = pop_front(start);
+    printf("\nPopped %d from front\n",temp->price);
+    print_list(start);
+    free_all(start);
+    free(temp);
+    return 0;
+  }
+
+  else if (!strcmp(argv[2], "E")){
+    printf("Pop End\n");
+    data_t* temp = pop_end(start);
+    printf("\nPopped %d from end\n",temp->price);
+    print_list(start);
+    free_all(start);
+    return 0;
+  }
+  else if (!strcmp(argv[2], "S")){
+    printf("Sort\n");
+    start = insertion_sort(start);
+    print_list(start);
+    free_all(start);
+    return 0;
+  }
+  else if (!strcmp(argv[2], "R")){
+    printf("Reverse\n");
+    start = reverse(start);
+    print_list(start);
+    free_all(start);
+    return 0;
+  }
+  else {
+    printf("Unknown Argument\n");
+    return 0;
+  }
 }

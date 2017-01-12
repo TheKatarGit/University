@@ -8,6 +8,8 @@ void main(){
   struct MyList_node* start1 = NULL;
   struct MyList_node* node;
 
+  if(!insertion_sort(NULL)){puts("Insertion sort rejected NULL. Test passed.");}
+
   node = create_node("egor", 20);
   start = add_front(start,node);
   node = create_node("egur", 21);
@@ -33,8 +35,8 @@ void main(){
       start1 = start1->next;
       start = start->next;
   }
-  if(a){puts("OK1!");}
-  if(!insertion_sort(NULL)){puts("OK2!");}
+  if(a){puts("List sorted correctly. Test Passed.");}
+
   return;
 
 }

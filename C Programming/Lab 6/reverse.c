@@ -28,7 +28,7 @@ void main(){
   struct MyList_node *start1 = reverse(start);
   start = reverse(start1);
 
-  if(!reverse(NULL)){puts("OK0!");}
+  if(!reverse(NULL)){puts("Reverse rejected NULL! Test passed.");}
 
   int a = 1;
   for (int i = 0 ; i < 4; i++){
@@ -36,7 +36,7 @@ void main(){
       start2 = start2->next;
       start = start->next;
   }
-  if(a){puts("OK1!");}
+  if(a){puts("List reversed correctly. Test passed.");}
 
   return;
 
