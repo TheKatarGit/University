@@ -1,7 +1,7 @@
 #include "list.h"
 
 struct MyList_node* create_node(char *model, int price){
-    struct MyList_node *node = malloc(sizeof(struct MyList_node));
+    struct MyList_node *node = malloc(sizeof(struct MyList_node*));
     if (node){
         node->data = malloc(sizeof(data_t));
         strcpy(node->data->model, model);
