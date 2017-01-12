@@ -49,6 +49,7 @@ void print_list(struct MyList_node *start){
 
 data_t* pop_front(struct MyList_node *start){
   struct MyList_node* temp = start;
+  if(!start){printf("\nInvalid pointer! \n");return NULL;}
   data_t *data = start->data;
   free(start);
   *start = *temp->next;
@@ -57,6 +58,7 @@ data_t* pop_front(struct MyList_node *start){
 
 data_t* pop_end(struct MyList_node *start){
   struct MyList_node *temp;
+  if(!start){printf("\nInvalid pointer! \n");return NULL;}
   while(start->next){
     if(start->next->next == NULL){temp = start;}
     start = start->next;
@@ -69,6 +71,7 @@ data_t* pop_end(struct MyList_node *start){
 
 struct MyList_node* reverse(struct MyList_node* root) {
   struct MyList_node* new_root = NULL;
+  if(!root){printf("\nInvalid pointer! \n");return NULL;}
   while (root) {
     struct MyList_node* next = root->next;
     root->next = new_root;
@@ -96,7 +99,7 @@ struct MyList_node* insert(struct MyList_node* begin, struct MyList_node* positi
 
 void free_all(struct MyList_node* start){
   struct MyList_node *next;
-
+  if(!start){printf("\nInvalid pointer! \n");return;}
   for ( ; start; start = next){
       puts("kek");
       next = start->next;
@@ -108,6 +111,7 @@ void free_all(struct MyList_node* start){
 
 
 struct MyList_node* insertion_sort(struct MyList_node* begin){
+   if(!begin){printf("Invalid pointer! \n");return NULL;}
    struct MyList_node* sorted = begin;
    struct MyList_node* preaktual = begin;
    struct MyList_node* pom;
